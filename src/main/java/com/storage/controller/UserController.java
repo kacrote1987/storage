@@ -22,4 +22,5 @@ public class UserController {
         UserLoginVo userVo= userService.login(form);
         return Result.success(userVo);
     }
+
 }

@@ -1,7 +1,10 @@
 package com.storage.entity.vo;
 
+import org.springframework.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PermissionVo {
     public Long getId() {
@@ -37,6 +40,13 @@ public class PermissionVo {
             p.setChildren(cList);
         }
         return tree;
+    }
+
+    public static void build(PermissionVo parent , List<PermissionVo> list){
+        List<PermissionVo> child = list.stream().filter(c-> c.getPid()-parent.getId()==0).collect(Collectors.toList());
+        if(CollectionUtils.isEmpty(child)) return;
+        parent.setChildren(child);
+        child.forEach(c->build(c,list));
     }
 
     public String getName() {

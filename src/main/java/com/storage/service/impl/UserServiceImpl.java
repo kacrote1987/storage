@@ -26,12 +26,15 @@ public class UserServiceImpl implements UserService {
         }
         userLoginVo.setToken(UUID.randomUUID().toString());
         MyCache.put(userLoginVo.getToken(),userLoginVo,30, TimeUnit.MINUTES);
-        List<PermissionVo> permissionVoList=userMapper.selectMenu(userLoginVo.getId());
+        final List<PermissionVo> permissionVoList=userMapper.selectMenu(userLoginVo.getId());
         if(permissionVoList==null || permissionVoList.size()==0){
             throw new UnAuthorizationException("无法获取角色信息");
         }
-        permissionVoList=PermissionVo.buildTree(permissionVoList);
-        userLoginVo.setPerms(permissionVoList);
+//        permissionVoList=PermissionVo.buildTree(permissionVoList);
+
+//        userLoginVo.setPerms(permissionVoList);
+        permissionVoList.forEach(item->PermissionVo.build(item,permissionVoList));
+
         return userLoginVo;
     }
 }
