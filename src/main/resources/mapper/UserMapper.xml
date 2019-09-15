@@ -5,6 +5,6 @@
         select a.*,b.name as role_name from t_user a inner join t_role b on a.role_id=b.id where a.code=#{username} and a.password=#{password} and a.status=1
     </select>
     <select id="selectMenu" resultType="com.storage.entity.vo.PermissionVo" >
-        select b.name,b.path,b.pid from t_permission a inner join t_menu b on a.menu_id=b.id where a.role_id=#{roleId}
+        select b.id,b.name,b.path,b.pid from t_permission a inner join t_menu b on a.menu_id=b.id where a.role_id=#{roleId}
     </select>
 </mapper>

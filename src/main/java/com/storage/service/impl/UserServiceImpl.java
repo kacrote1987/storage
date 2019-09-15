@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,8 +33,9 @@ public class UserServiceImpl implements UserService {
         }
 //        permissionVoList=PermissionVo.buildTree(permissionVoList);
 
-//        userLoginVo.setPerms(permissionVoList);
         permissionVoList.forEach(item->PermissionVo.build(item,permissionVoList));
+
+        userLoginVo.setPerms(permissionVoList.stream().filter(item->item.getPid()==0).collect(Collectors.toList()));
 
         return userLoginVo;
     }

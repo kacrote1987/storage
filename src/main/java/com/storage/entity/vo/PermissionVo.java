@@ -20,27 +20,27 @@ public class PermissionVo {
     private String path;
     private Long pid;
     private List<PermissionVo> children;
-    public static List<PermissionVo> buildTree(List<PermissionVo> list){
-        List<PermissionVo> tree=new ArrayList<>();
-        List<PermissionVo> child=new ArrayList<>();
-        for(int i=0;i<list.size();i++){
-            if(list.get(i).getPid()==0){
-                tree.add(list.get(i));
-            }else {
-                child.add(list.get(i));
-            }
-        }
-        for(PermissionVo p : tree){
-            List<PermissionVo> cList = new ArrayList<>();
-            for(PermissionVo c : child){
-                if(c.getPid()-p.getId()==0){
-                    cList.add(c);
-                }
-            }
-            p.setChildren(cList);
-        }
-        return tree;
-    }
+//    public static List<PermissionVo> buildTree(List<PermissionVo> list){
+//        List<PermissionVo> tree=new ArrayList<>();
+//        List<PermissionVo> child=new ArrayList<>();
+//        for(int i=0;i<list.size();i++){
+//            if(list.get(i).getPid()==0){
+//                tree.add(list.get(i));
+//            }else {
+//                child.add(list.get(i));
+//            }
+//        }
+//        for(PermissionVo p : tree){
+//            List<PermissionVo> cList = new ArrayList<>();
+//            for(PermissionVo c : child){
+//                if(c.getPid()-p.getId()==0){
+//                    cList.add(c);
+//                }
+//            }
+//            p.setChildren(cList);
+//        }
+//        return tree;
+//    }
 
     public static void build(PermissionVo parent , List<PermissionVo> list){
         List<PermissionVo> child = list.stream().filter(c-> c.getPid()-parent.getId()==0).collect(Collectors.toList());
