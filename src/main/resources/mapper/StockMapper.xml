@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybaselectByUsernametis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.storage.mapper.StockMapper">
+    <select id="select" resultType="com.storage.entity.vo.StockVo" >
+        select a.*,b.name as catg_name from t_stock a inner join t_catg b on a.catg_id=b.id where 1=1
+        <if test="catgId!=null">
+            and a.catg_id=#{catgId}
+        </if>
+        <if test="name!=null">
+            and a.name like '%'||#{name}||'%'
+        </if>
+        <if test="num!=null">
+            and a.num like '%'||#{num}||'%'
+        </if>
+        <if test="cabno!=null">
+            and a.cabno like '%'||#{cabno}||'%'
+        </if>
+    </select>
+    <insert id="insert">
+        insert into t_stock(catg_id,name,num,cabno) values(#{catgId},#{name},#{num},#{cabno})
+    </insert>
+    <insert id="out">
+        update t_stock set num=num-#{num} where id=#{id}
+    </insert>
+</mapper>
