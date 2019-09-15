@@ -18,26 +18,26 @@ public class AppConfig implements WebMvcConfigurer {
     @Resource
     Authorization authorizationInterceptor;
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//
-//        InterceptorRegistration addInterceptor = registry.addInterceptor(authorizationInterceptor);
-//
-//        addInterceptor.excludePathPatterns("/user/login",
-//                "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**",
-//                "/",
-//                "",
-//                "/index")
-//                .addPathPatterns("/**");
-//    }
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("swagger-ui.html")
-//                .addResourceLocations("classpath:/META-INF/resources/");
-//
-//        registry.addResourceHandler("/webjars/**")
-//                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-//
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+
+        InterceptorRegistration addInterceptor = registry.addInterceptor(authorizationInterceptor);
+
+        addInterceptor.excludePathPatterns("/user/login",
+                "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**",
+                "/",
+                "",
+                "/index")
+                .addPathPatterns("/**");
+    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+    }
 
 }
