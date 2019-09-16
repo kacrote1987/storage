@@ -1,16 +1,16 @@
 package com.storage.controller;
 
 import com.storage.entity.form.LoginForm;
+import com.storage.entity.vo.PermissionVo;
 import com.storage.entity.vo.UserLoginVo;
+import com.storage.entity.vo.UserManageVo;
 import com.storage.service.UserService;
 import com.storage.util.Result;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -22,5 +22,19 @@ public class UserController {
         UserLoginVo userVo= userService.login(form);
         return Result.success(userVo);
     }
-
+    @GetMapping("/select")
+    public Result select(String code){
+        List<UserManageVo> list= userService.select(code);
+        return Result.success(list);
+    }
+    @GetMapping("/edit")
+    public Result edit(Long userId){
+        UserManageVo userManageVo= userService.edit(userId);
+        return Result.success(userManageVo);
+    }
+    @GetMapping("/save")
+    public Result save(@RequestBody @Valid UserManageVo form){
+        userService.save(form);
+        return null;
+    }
 }

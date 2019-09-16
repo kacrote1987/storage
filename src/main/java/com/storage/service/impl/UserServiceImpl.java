@@ -3,6 +3,7 @@ package com.storage.service.impl;
 import com.storage.entity.form.LoginForm;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.PermissionVo;
+import com.storage.entity.vo.UserManageVo;
 import com.storage.exception.UnAuthorizationException;
 import com.storage.mapper.UserMapper;
 import com.storage.service.UserService;
@@ -31,12 +32,34 @@ public class UserServiceImpl implements UserService {
         if(permissionVoList==null || permissionVoList.size()==0){
             throw new UnAuthorizationException("无法获取角色信息");
         }
-//        permissionVoList=PermissionVo.buildTree(permissionVoList);
 
         permissionVoList.forEach(item->PermissionVo.build(item,permissionVoList));
 
         userLoginVo.setPerms(permissionVoList.stream().filter(item->item.getPid()==0).collect(Collectors.toList()));
 
         return userLoginVo;
+    }
+
+    @Override
+    public List<UserManageVo> select(String code) {
+        List<UserManageVo> list=userMapper.selectUser(code);
+        for(int i=0;i<list.size();i++){
+            list.get(i).setPerms(userMapper.selectMenu(list.get(i).getRolerId()));
+        }
+
+        return list;
+    }
+
+    @Override
+    public UserManageVo edit(Long userId) {
+        UserManageVo userManageVo=userMapper.selectUserId(userId);
+        userManageVo.setPerms(userMapper.selectMenu(userManageVo.getRolerId()));
+        return userManageVo;
+    }
+
+    @Override
+    public String save(UserManageVo form) {
+        userMapper.saveUser(form.getId(),form.getName(),form.getRolerId());
+        return "保存成功";
     }
 }
