@@ -16,4 +16,13 @@
     <update id="saveUser">
         update t_user set name=#{name},role_id=#{roleId} where id=#{id}
     </update>
+    <select id="selectUserId" resultType="com.storage.entity.vo.UserManageVo" >
+        select a.id,a.name,a.code,a.role_id,b.name as role_name from t_user a inner join t_role b on a.role_id=b.id where a.user_id=#{userId}
+    </select>
+    <select id="getRole" resultType="com.storage.entity.Role" >
+        select * from t_role where 1=1
+    </select>
+    <select id="getMenu" resultType="com.storage.entity.Menu" >
+        select * from t_menu where 1=1
+    </select>
 </mapper>

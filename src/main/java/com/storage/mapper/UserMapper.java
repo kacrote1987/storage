@@ -1,5 +1,7 @@
 package com.storage.mapper;
 
+import com.storage.entity.Menu;
+import com.storage.entity.Role;
 import com.storage.entity.vo.PermissionVo;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.UserManageVo;
@@ -14,4 +16,6 @@ public interface UserMapper {
     List<UserManageVo> selectUser(String code);
     UserManageVo selectUserId(Long userId);
     void saveUser(Long id,String name,Long roleId);
+    Role getRole();
+    Menu getMenu();
 }

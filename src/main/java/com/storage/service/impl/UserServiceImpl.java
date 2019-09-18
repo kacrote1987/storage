@@ -1,5 +1,8 @@
 package com.storage.service.impl;
 
+import com.storage.entity.Menu;
+import com.storage.entity.Permission;
+import com.storage.entity.Role;
 import com.storage.entity.form.LoginForm;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.PermissionVo;
@@ -61,5 +64,17 @@ public class UserServiceImpl implements UserService {
     public String save(UserManageVo form) {
         userMapper.saveUser(form.getId(),form.getName(),form.getRolerId());
         return "保存成功";
+    }
+
+    @Override
+    public Role disprole() {
+        Role role=userMapper.getRole();
+        return role;
+    }
+
+    @Override
+    public Menu dispmenu() {
+        Menu menu=userMapper.getMenu();
+        return menu;
     }
 }

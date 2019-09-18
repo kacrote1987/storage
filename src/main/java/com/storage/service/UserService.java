@@ -1,5 +1,7 @@
 package com.storage.service;
 
+import com.storage.entity.Menu;
+import com.storage.entity.Role;
 import com.storage.entity.form.LoginForm;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.UserManageVo;
@@ -23,4 +25,12 @@ public interface UserService {
      * 用户保存
      */
     String save(UserManageVo form);
+    /**
+     * 展示用户角色
+     */
+    Role disprole();
+    /**
+     * 展示权限
+     */
+    Menu dispmenu();
 }
