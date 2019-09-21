@@ -15,6 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/stock")
 public class StockController {
+    /**
+     * 查询
+     */
     @Resource
     StockService stockService;
     @PostMapping("/select")
