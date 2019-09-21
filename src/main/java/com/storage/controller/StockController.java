@@ -17,6 +17,12 @@ import java.util.List;
 public class StockController {
     @Resource
     StockService stockService;
+
+    /**
+     * asdnals;das
+     * @param form
+     * @return
+     */
     @PostMapping("/select")
     public Result login(@RequestBody StockForm form){
         List<StockVo> list= stockService.select(form);
