@@ -1,8 +1,11 @@
 package com.storage.service;
 
 import com.storage.entity.Menu;
+import com.storage.entity.Permission;
 import com.storage.entity.Role;
 import com.storage.entity.form.LoginForm;
+import com.storage.entity.form.PermForm;
+import com.storage.entity.vo.PermissionVo;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.UserManageVo;
 
@@ -26,11 +29,15 @@ public interface UserService {
      */
     String save(UserManageVo form);
     /**
-     * 展示用户角色
+     * 展示所有角色
      */
     Role disprole();
     /**
-     * 展示权限
+     * 展示所有权限
      */
     Menu dispmenu();
+    /**
+     * 修改权限
+     */
+    List<PermissionVo> editperm(PermForm form);
 }

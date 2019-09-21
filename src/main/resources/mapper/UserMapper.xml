@@ -25,4 +25,10 @@
     <select id="getMenu" resultType="com.storage.entity.Menu" >
         select * from t_menu where 1=1
     </select>
+    <delete id="delPerm">
+        delete from t_permission where role_id=#{roleId}
+    </delete>
+    <insert id="addPerm">
+        insert into t_permission(role_id,menu_id) values(#{roleId},#{menuId})
+    </insert>
 </mapper>

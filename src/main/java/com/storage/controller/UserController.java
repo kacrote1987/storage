@@ -1,8 +1,11 @@
 package com.storage.controller;
 
 import com.storage.entity.Menu;
+import com.storage.entity.Permission;
 import com.storage.entity.Role;
 import com.storage.entity.form.LoginForm;
+import com.storage.entity.form.PermForm;
+import com.storage.entity.vo.PermissionVo;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.UserManageVo;
 import com.storage.service.UserService;
@@ -47,5 +50,10 @@ public class UserController {
     public Result dispmenu(){
         Menu menu= userService.dispmenu();
         return Result.success(menu);
+    }
+    @PostMapping("/editperm")
+    public Result editperm(@RequestBody @Valid PermForm form){
+        List<PermissionVo> permissionVoList= userService.editperm(form);
+        return Result.success(permissionVoList);
     }
 }

@@ -4,6 +4,7 @@ import com.storage.entity.Menu;
 import com.storage.entity.Permission;
 import com.storage.entity.Role;
 import com.storage.entity.form.LoginForm;
+import com.storage.entity.form.PermForm;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.PermissionVo;
 import com.storage.entity.vo.UserManageVo;
@@ -76,5 +77,15 @@ public class UserServiceImpl implements UserService {
     public Menu dispmenu() {
         Menu menu=userMapper.getMenu();
         return menu;
+    }
+
+    @Override
+    public List<PermissionVo> editperm(PermForm form) {
+        userMapper.delPerm(form.getRoleId());
+        for(int i=0;i<form.getPerms().size();i++){
+            userMapper.addPerm(form.getPerms().get(i).getRoleId(),form.getPerms().get(i).getMenuId());
+        }
+        List<PermissionVo> permissionVoList=userMapper.selectMenu(form.getRoleId());
+        return permissionVoList;
     }
 }
