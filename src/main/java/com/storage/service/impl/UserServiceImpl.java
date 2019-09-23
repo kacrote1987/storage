@@ -1,10 +1,11 @@
 package com.storage.service.impl;
 
 import com.storage.entity.Menu;
-import com.storage.entity.Permission;
 import com.storage.entity.Role;
 import com.storage.entity.form.LoginForm;
 import com.storage.entity.form.PermForm;
+import com.storage.entity.form.UserEditForm;
+import com.storage.entity.form.UserNewForm;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.PermissionVo;
 import com.storage.entity.vo.UserManageVo;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,14 +32,14 @@ public class UserServiceImpl implements UserService {
         }
         userLoginVo.setToken(UUID.randomUUID().toString());
         MyCache.put(userLoginVo.getToken(),userLoginVo,30, TimeUnit.MINUTES);
-        final List<PermissionVo> permissionVoList=userMapper.selectMenu(userLoginVo.getId());
+        final List<PermissionVo> permissionVoList=userMapper.selectPerm(userLoginVo.getRoleId());
         if(permissionVoList==null || permissionVoList.size()==0){
             throw new UnAuthorizationException("无法获取角色信息");
         }
 
-        permissionVoList.forEach(item->PermissionVo.build(item,permissionVoList));
-
-        userLoginVo.setPerms(permissionVoList.stream().filter(item->item.getPid()==0).collect(Collectors.toList()));
+//        permissionVoList.forEach(item->PermissionVo.build(item,permissionVoList));
+//
+//        userLoginVo.setPerms(permissionVoList.stream().filter(item->item.getPid()==0).collect(Collectors.toList()));
 
         return userLoginVo;
     }
@@ -48,44 +48,54 @@ public class UserServiceImpl implements UserService {
     public List<UserManageVo> select(String code) {
         List<UserManageVo> list=userMapper.selectUser(code);
         for(int i=0;i<list.size();i++){
-            list.get(i).setPerms(userMapper.selectMenu(list.get(i).getRolerId()));
+            list.get(i).setPerms(userMapper.selectPerm(list.get(i).getRoleId()));
         }
-
         return list;
     }
 
     @Override
-    public UserManageVo edit(Long userId) {
-        UserManageVo userManageVo=userMapper.selectUserId(userId);
-        userManageVo.setPerms(userMapper.selectMenu(userManageVo.getRolerId()));
-        return userManageVo;
-    }
-
-    @Override
-    public String save(UserManageVo form) {
-        userMapper.saveUser(form.getId(),form.getName(),form.getRolerId());
-        return "保存成功";
-    }
-
-    @Override
-    public Role disprole() {
-        Role role=userMapper.getRole();
-        return role;
-    }
-
-    @Override
-    public Menu dispmenu() {
-        Menu menu=userMapper.getMenu();
-        return menu;
-    }
-
-    @Override
-    public List<PermissionVo> editperm(PermForm form) {
-        userMapper.delPerm(form.getRoleId());
-        for(int i=0;i<form.getPerms().size();i++){
-            userMapper.addPerm(form.getPerms().get(i).getRoleId(),form.getPerms().get(i).getMenuId());
+    public List<UserManageVo> detail(Long userId) {
+        List<UserManageVo> list=userMapper.detailUser(userId);
+        for(int i=0;i<list.size();i++){
+            list.get(i).setPerms(userMapper.selectPerm(list.get(i).getRoleId()));
         }
-        List<PermissionVo> permissionVoList=userMapper.selectMenu(form.getRoleId());
-        return permissionVoList;
+        return list;
     }
+
+    @Override
+    public void insert(UserNewForm form) {
+        userMapper.insertUser(form.getCode(),form.getName(),form.getRoleId());
+    }
+
+    @Override
+    public void edit(UserEditForm form) {
+        userMapper.updateUser(form.getUserId(),form.getCode(),form.getPassword(),form.getName(),form.getRoleId());
+    }
+
+    @Override
+    public Role allroles() {
+        Role roles=userMapper.getRole();
+        return roles;
+    }
+
+    @Override
+    public Menu allmenus() {
+        Menu menus=userMapper.getMenu();
+        return menus;
+    }
+
+    @Override
+    public List<PermissionVo> permdetail(Long roleId) {
+        List<PermissionVo> list=userMapper.selectPerm(roleId);
+        return list;
+    }
+
+    @Override
+    public void editperm(PermForm perms) {
+        userMapper.delPerm(perms.getRoleId());
+        for(int i=0;i<=perms.getPerms().size();i++){
+            userMapper.addPerm(perms.getPerms().get(i).getRoleId(),perms.getPerms().get(i).getMenuId());
+        }
+    }
+
 }

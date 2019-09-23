@@ -14,6 +14,10 @@ public class Result {
         return new Result(200,"sucess",data);
     }
 
+    public static Result success(){
+        return new Result(200,"sucess",null);
+    }
+
     public static Result failed(String msg){
         return new Result(500,msg,null);
     }

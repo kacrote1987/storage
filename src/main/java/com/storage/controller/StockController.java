@@ -1,5 +1,6 @@
 package com.storage.controller;
 
+import com.github.pagehelper.Page;
 import com.storage.entity.form.StockForm;
 import com.storage.entity.vo.StockVo;
 import com.storage.service.StockService;
@@ -15,14 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/stock")
 public class StockController {
-    /**
-     * 查询
-     */
     @Resource
     StockService stockService;
     @PostMapping("/select")
-    public Result login(@RequestBody StockForm form){
-        List<StockVo> list= stockService.select(form);
+    public Result select(@RequestBody StockForm form){
+        Page<StockVo> list= stockService.select(form);
         return Result.success(list);
     }
     @PostMapping("/insert")

@@ -3,19 +3,19 @@ package com.storage.entity.vo;
 import java.util.List;
 
 public class UserManageVo {
-    private Long id;
+    private Long userId;
     private String name;
     private String code;
-    private Long rolerId;
+    private Long roleId;
     private String roleName;
     List<PermissionVo> perms;
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -34,12 +34,12 @@ public class UserManageVo {
         this.code = code;
     }
 
-    public Long getRolerId() {
-        return rolerId;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRolerId(Long rolerId) {
-        this.rolerId = rolerId;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public String getRoleName() {

@@ -12,10 +12,11 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     UserLoginVo selectByUsername(String username, String password);
-    List<PermissionVo> selectMenu(Long roleId);
+    List<PermissionVo> selectPerm(Long roleId);
     List<UserManageVo> selectUser(String code);
-    UserManageVo selectUserId(Long userId);
-    void saveUser(Long id,String name,Long roleId);
+    List<UserManageVo> detailUser(Long userId);
+    void insertUser(String code,String name,Long roleId);
+    void updateUser(Long userId,String code,String password,String name,Long roleId);
     Role getRole();
     Menu getMenu();
     void delPerm(Long roleId);

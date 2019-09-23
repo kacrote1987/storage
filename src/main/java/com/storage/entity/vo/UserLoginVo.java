@@ -1,6 +1,7 @@
 package com.storage.entity.vo;
 
-import java.beans.Transient;
+import com.storage.entity.Permission;
+
 import java.util.List;
 
 public class UserLoginVo {

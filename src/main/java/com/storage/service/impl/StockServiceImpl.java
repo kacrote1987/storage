@@ -1,5 +1,8 @@
 package com.storage.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.storage.entity.form.StockForm;
 import com.storage.entity.vo.StockVo;
 import com.storage.mapper.StockMapper;
@@ -15,8 +18,9 @@ public class StockServiceImpl implements StockService {
     StockMapper stockMapper;
 
     @Override
-    public List select(StockForm form) {
-        List<StockVo> list=stockMapper.select(form.getCatgId(),form.getName(),form.getNum(),form.getCabno());
+    public Page<StockVo> select(StockForm form) {
+        PageHelper.startPage(form.getPageNo(),form.getSize());
+        Page<StockVo> list=stockMapper.select(form.getCatgId(),form.getName(),form.getNum(),form.getCabno());
         return list;
     }
 

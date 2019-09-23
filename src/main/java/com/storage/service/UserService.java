@@ -4,6 +4,8 @@ import com.storage.entity.Menu;
 import com.storage.entity.Role;
 import com.storage.entity.form.LoginForm;
 import com.storage.entity.form.PermForm;
+import com.storage.entity.form.UserEditForm;
+import com.storage.entity.form.UserNewForm;
 import com.storage.entity.vo.PermissionVo;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.UserManageVo;
@@ -16,27 +18,35 @@ public interface UserService {
      */
     UserLoginVo login(LoginForm form);
     /**
-     * 用户管理
+     * 用户查询
      */
     List<UserManageVo> select(String code);
     /**
      * 用户详细
      */
-    UserManageVo edit(Long userId);
+    List<UserManageVo> detail(Long userId);
     /**
-     * 用户保存
+     * 用户新增
      */
-    String save(UserManageVo form);
+    void insert(UserNewForm form);
     /**
-     * 展示所有角色
+     * 用户修改
      */
-    Role disprole();
+    void edit(UserEditForm form);
     /**
-     * 展示所有权限
+     * 所有角色列表
      */
-    Menu dispmenu();
+    Role allroles();
+    /**
+     * 所有权限列表
+     */
+    Menu allmenus();
+    /**
+     * 某角色权限列表
+     */
+    List<PermissionVo> permdetail(Long roleId);
     /**
      * 修改权限
      */
-    List<PermissionVo> editperm(PermForm form);
+    void editperm(PermForm perms);
 }

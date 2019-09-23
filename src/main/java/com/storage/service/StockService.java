@@ -1,5 +1,6 @@
 package com.storage.service;
 
+import com.github.pagehelper.Page;
 import com.storage.entity.form.StockForm;
 
 import java.util.List;
@@ -8,7 +9,7 @@ public interface StockService {
     /**
      * 库存查询
      */
-    List select(StockForm form);
+    Page select(StockForm form);
     /**
      * 手动入库
      */
