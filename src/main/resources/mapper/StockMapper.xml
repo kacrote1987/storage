@@ -13,10 +13,10 @@
             and stockno like '%'||#{code}||'%'
         </if>
         <if test="timeStart!=null">
-            and time >= #{timeStart}
+            and time &gt;= #{timeStart}
         </if>
         <if test="timeEnd!=null">
-            and time <= #{timeEnd}
+            and time &lt;= #{timeEnd}
         </if>
     </select>
     <select id="selectId" resultType="com.storage.entity.vo.StockVo" >
