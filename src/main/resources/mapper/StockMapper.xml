@@ -2,24 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybaselectByUsernametis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.storage.mapper.StockMapper">
     <select id="select" resultType="com.storage.entity.vo.StockVo" >
-        select a.*,b.name as catg_name from t_stock a inner join t_catg b on a.catg_id=b.id where 1=1
-        <if test="catgId!=null">
-            and a.catg_id=#{catgId}
-        </if>
-        <if test="name!=null">
-            and a.name like '%'||#{name}||'%'
-        </if>
-        <if test="num!=null">
-            and a.num like '%'||#{num}||'%'
-        </if>
-        <if test="cabno!=null">
-            and a.cabno like '%'||#{cabno}||'%'
+        select * from t_stock where 1=1
+        <if test="code!=null">
+            and (id+10000 like '%'||#{code}||'%' or name like '%'||#{code}||'%')
         </if>
     </select>
-    <insert id="insert">
-        insert into t_stock(catg_id,name,num,cabno) values(#{catgId},#{name},#{num},#{cabno})
+    <select id="selectorder" resultType="com.storage.entity.vo.OrderVo" >
+        select * from t_order where tag=1
+        <if test="code!=null">
+            and stockno like '%'||#{code}||'%'
+        </if>
+        <if test="timeStart!=null">
+            and time >= #{timeStart}
+        </if>
+        <if test="timeEnd!=null">
+            and time <= #{timeEnd}
+        </if>
+    </select>
+    <select id="selectId" resultType="com.storage.entity.vo.StockVo" >
+        select * from t_stock where 1=1
+        <if test="code!=null">
+            and (id+1000 like '%'||#{code}||'%' or name like '%'||#{code}||'%')
+        </if>
+    </select>
+    <select id="selectproducer" resultType="com.storage.entity.Producer" >
+        select * from t_producer where status=1
+    </select>
+    <select id="selectstock" resultType="com.storage.entity.Stock" >
+        select * from t_stock where 1=1
+    </select>
+    <insert id="insertorder">
+        insert into t_order(corderno,time,operator,producer,tag) values(#{orderno},sysdate,#{operator},#{producer},#{tag})
     </insert>
-    <insert id="out">
+    <insert id="insertorderdetail">
+        insert into t_order(order_id,stock_id,num) values(#{orderId},sysdate,#{stockId},#{num})
+    </insert>
+    <select id="selectorderbyno" resultType="com.storage.entity.vo.OrderVo" >
+        select * from t_order where orderno=#{orderno}
+    </select>
+    <select id="selectnum" >
+        select num from t_stock where id=#{id}
+    </select>
+    <update id="insertstock">
+        update t_stock set num=num+#{num} where id=#{id}
+    </update>
+    <update id="deletestock">
         update t_stock set num=num-#{num} where id=#{id}
-    </insert>
+    </update>
 </mapper>

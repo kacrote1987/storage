@@ -1,11 +1,20 @@
 package com.storage.entity.vo;
 
 public class StockVo {
+    private Long id;
     private String name;
-    private Integer num;
-    private String cabno;
-    private Long catgId;
-    private String catgName;
+    private String spec;
+    private String unit;
+    private Long num;
+    private String producer;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -15,35 +24,35 @@ public class StockVo {
         this.name = name;
     }
 
-    public Integer getNum() {
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Long getNum() {
         return num;
     }
 
-    public void setNum(Integer num) {
+    public void setNum(Long num) {
         this.num = num;
     }
 
-    public String getCabno() {
-        return cabno;
+    public String getProducer() {
+        return producer;
     }
 
-    public void setCabno(String cabno) {
-        this.cabno = cabno;
-    }
-
-    public Long getCatgId() {
-        return catgId;
-    }
-
-    public void setCatgId(Long catgId) {
-        this.catgId = catgId;
-    }
-
-    public String getCatgName() {
-        return catgName;
-    }
-
-    public void setCatgName(String catgName) {
-        this.catgName = catgName;
+    public void setProducer(String producer) {
+        this.producer = producer;
     }
 }

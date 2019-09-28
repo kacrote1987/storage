@@ -1,7 +1,11 @@
 package com.storage.entity.form;
 
-public class StockForm {
+import java.util.Date;
+
+public class OrderSelectForm {
     private String code;
+    private Date timeStart;
+    private Date timeEnd;
     private Integer pageNo;
     private Integer pageSize;
 
@@ -11,6 +15,22 @@ public class StockForm {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Date getTimeStart() {
+        return timeStart;
+    }
+
+    public void setTimeStart(Date timeStart) {
+        this.timeStart = timeStart;
+    }
+
+    public Date getTimeEnd() {
+        return timeEnd;
+    }
+
+    public void setTimeEnd(Date timeEnd) {
+        this.timeEnd = timeEnd;
     }
 
     public Integer getPageNo() {
