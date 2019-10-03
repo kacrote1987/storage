@@ -1,6 +1,6 @@
-package com.storage.entity;
+package com.storage.entity.vo;
 
-public class Role {
+public class Producer {
     private Long id;
     private String name;
 

@@ -1,7 +1,8 @@
-package com.storage.entity;
+package com.storage.entity.vo;
 
-public class Producer {
+public class GoodsList {
     private Long id;
+    private String gno;
     private String name;
 
     public Long getId() {
@@ -10,6 +11,14 @@ public class Producer {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getGno() {
+        return gno;
+    }
+
+    public void setGno(String gno) {
+        this.gno = gno;
     }
 
     public String getName() {

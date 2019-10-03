@@ -1,24 +1,15 @@
 package com.storage.entity.form;
 
 public class OrderDetailForm {
-    private Long id;
-    private Long proid;
+    private Long goodsId;
     private Long num;
 
-    public Long getId() {
-        return id;
+    public Long getGoodsId() {
+        return goodsId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getProid() {
-        return proid;
-    }
-
-    public void setProid(Long proid) {
-        this.proid = proid;
+    public void setGoodsId(Long goodsId) {
+        this.goodsId = goodsId;
     }
 
     public Long getNum() {

@@ -1,6 +1,6 @@
 package com.storage.entity.form;
 
-public class StockForm {
+public class StockSelectForm {
     private String code;
     private Integer pageNo;
     private Integer pageSize;

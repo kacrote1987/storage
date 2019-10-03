@@ -1,6 +1,6 @@
 package com.storage.entity.vo;
 
-public class StockVo {
+public class OrderDetailVo {
     private Long id;
     private Long gno;
     private String name;

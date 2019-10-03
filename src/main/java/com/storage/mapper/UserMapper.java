@@ -1,7 +1,7 @@
 package com.storage.mapper;
 
-import com.storage.entity.Menu;
-import com.storage.entity.Role;
+import com.storage.entity.vo.Menu;
+import com.storage.entity.vo.Role;
 import com.storage.entity.vo.PermissionVo;
 import com.storage.entity.vo.UserLoginVo;
 import com.storage.entity.vo.UserManageVo;

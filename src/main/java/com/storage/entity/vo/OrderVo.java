@@ -7,9 +7,8 @@ public class OrderVo {
     private Long id;
     private Date time;
     private Long orderno;
-    private String operator;
-    private String producer;
-    List<StockVo> list;
+    private String userName;
+    List<OrderDetailVo> list;
 
     public Long getId() {
         return id;
@@ -35,27 +34,19 @@ public class OrderVo {
         this.orderno = orderno;
     }
 
-    public String getOperator() {
-        return operator;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setOperator(String operator) {
-        this.operator = operator;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getProducer() {
-        return producer;
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;
-    }
-
-    public List<StockVo> getList() {
+    public List<OrderDetailVo> getList() {
         return list;
     }
 
-    public void setList(List<StockVo> list) {
+    public void setList(List<OrderDetailVo> list) {
         this.list = list;
     }
 }

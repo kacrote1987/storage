@@ -1,7 +1,7 @@
 package com.storage.service.impl;
 
-import com.storage.entity.Menu;
-import com.storage.entity.Role;
+import com.storage.entity.vo.Menu;
+import com.storage.entity.vo.Role;
 import com.storage.entity.form.LoginForm;
 import com.storage.entity.form.PermForm;
 import com.storage.entity.form.UserEditForm;

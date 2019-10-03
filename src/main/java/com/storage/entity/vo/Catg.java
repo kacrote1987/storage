@@ -1,4 +1,4 @@
-package com.storage.entity;
+package com.storage.entity.vo;
 
 public class Catg {
     private Integer id;

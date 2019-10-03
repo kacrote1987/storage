@@ -2,51 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybaselectByUsernametis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.storage.mapper.StockMapper">
     <select id="select" resultType="com.storage.entity.vo.StockVo" >
-        select * from t_stock where 1=1
+        select a.id,b.gno,b.name,b.spec,b.unit,a.num,c.name from t_stock a inner join t_goods b on a.goods_id=b.id inner join t_producer c on b.pro_id=c.id where 1=1
         <if test="code!=null">
-            and (id+10000 like '%'||#{code}||'%' or name like '%'||#{code}||'%')
+            and (b.gno like '%'||#{code}||'%' or b.name like '%'||#{code}||'%')
         </if>
     </select>
     <select id="selectorder" resultType="com.storage.entity.vo.OrderVo" >
-        select * from t_order where tag=1
+        select a.id,a.time,a.orderno,b.name from t_order a inner join t_user b on a.user_id=b.id where a.status=1
         <if test="code!=null">
-            and stockno like '%'||#{code}||'%'
+            and a.orderno like '%'||#{code}||'%'
         </if>
         <if test="timeStart!=null">
-            and time &gt;= #{timeStart}
+            and a.time &gt;= #{timeStart}
         </if>
         <if test="timeEnd!=null">
-            and time &lt;= #{timeEnd}
+            and a.time &lt;= #{timeEnd}
         </if>
     </select>
-    <select id="selectId" resultType="com.storage.entity.vo.StockVo" >
-        select * from t_stock where 1=1
-        <if test="code!=null">
-            and (id+1000 like '%'||#{code}||'%' or name like '%'||#{code}||'%')
-        </if>
+    <select id="selectOrderDetailById" resultType="com.storage.entity.vo.OrderDetailVo" >
+        select a.id,b.gno,b.name,b.spec,b.unit,a.num,c.name from t_orderdetail a inner join t_goods b on a.goods_id=b.id inner join t_producer c on b.pro_id=c.id where a.order_id=#{orderId}
     </select>
-    <select id="selectproducer" resultType="com.storage.entity.Producer" >
-        select * from t_producer where status=1
+    <select id="selectgoods" resultType="com.storage.entity.vo.GoodsList" >
+        select id,gno,name from t_goods where 1=1
     </select>
-    <select id="selectstock" resultType="com.storage.entity.Stock" >
-        select * from t_stock where 1=1
+    <select id="selectproducer" resultType="com.storage.entity.vo.Producer" >
+        select id,name from t_producer where status=1
     </select>
     <insert id="insertorder">
-        insert into t_order(corderno,time,operator,producer,tag) values(#{orderno},sysdate,#{operator},#{producer},#{tag})
+        insert into t_order(orderno,time,user_id,status) values(#{orderno},sysdate,#{userId},#{status})
     </insert>
     <insert id="insertorderdetail">
-        insert into t_order(order_id,stock_id,num) values(#{orderId},sysdate,#{stockId},#{num})
+        insert into t_orderdetail(order_id,goods_id,num) values(#{orderId},#{goodsId},#{num})
     </insert>
     <select id="selectorderbyno" resultType="com.storage.entity.vo.OrderVo" >
-        select * from t_order where orderno=#{orderno}
+        select a.id,a.time,a.orderno,b.user_name from t_order a inner join t_user b on a.user_id=b.id where orderno=#{orderno}
     </select>
     <select id="selectnum" >
-        select num from t_stock where id=#{id}
+        select num from t_stock where goods_id=#{goodsId}
     </select>
     <update id="insertstock">
-        update t_stock set num=num+#{num} where id=#{id}
+        update t_stock set num=num+#{num} where goods_id=#{goodsId}
     </update>
     <update id="deletestock">
-        update t_stock set num=num-#{num} where id=#{id}
+        update t_stock set num=num-#{num} where goods_id=#{goodsId}
     </update>
 </mapper>

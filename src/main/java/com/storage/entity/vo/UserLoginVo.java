@@ -1,7 +1,5 @@
 package com.storage.entity.vo;
 
-import com.storage.entity.Permission;
-
 import java.util.List;
 
 public class UserLoginVo {

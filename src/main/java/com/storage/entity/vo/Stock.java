@@ -1,4 +1,4 @@
-package com.storage.entity;
+package com.storage.entity.vo;
 
 public class Stock {
     private Integer id;

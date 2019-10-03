@@ -1,6 +1,6 @@
 package com.storage.entity.form;
 
-import com.storage.entity.Permission;
+import com.storage.entity.vo.Permission;
 
 import java.util.List;
 

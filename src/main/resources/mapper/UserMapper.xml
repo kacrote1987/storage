@@ -22,10 +22,10 @@
     <update id="updateUser">
         update t_user set code=#{code},password=#{password},name=#{name},role_id=#{roleId} where id=#{userId}
     </update>
-    <select id="getRole" resultType="com.storage.entity.Role" >
+    <select id="getRole" resultType="com.storage.entity.vo.Role" >
         select * from t_role where 1=1
     </select>
-    <select id="getMenu" resultType="com.storage.entity.Menu" >
+    <select id="getMenu" resultType="com.storage.entity.vo.Menu" >
         select * from t_menu where 1=1
     </select>
     <delete id="delPerm">
