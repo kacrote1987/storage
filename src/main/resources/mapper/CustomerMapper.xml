@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybaselectByUsernametis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.storage.mapper.CustomerMapper">
+    <select id="selectCustomer" resultType="com.storage.entity.vo.CustomerVo" >
+        select id,name,idcard,tel,vipcard,score from t_customer where status=1
+        <if test="code!=null">
+            and (tel like '%'||#{code}||'%' or vipcard like '%'||#{code}||'%' or idcard like '%'||#{code}||'%')
+        </if>
+    </select>
+    <select id="selectcustomerid">
+        select id from t_customer where status=1 and (tel like '%'||#{code}||'%' or vipcard like '%'||#{code}||'%' or idcard like '%'||#{code}||'%')
+    </select>
+    <insert id="register">
+        insert into t_customer(name,idcard,tel,vipcard,score,status) values(#{name},#{idCard},#{tel},#{vipCard},0,1)
+    </insert>
+    <update id="unregister">
+        update t_customer set status=0 where id=#{id}
+    </update>
+</mapper>
