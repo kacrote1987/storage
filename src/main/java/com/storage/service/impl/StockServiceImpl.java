@@ -2,9 +2,9 @@ package com.storage.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.storage.entity.form.OrderForm;
 import com.storage.entity.vo.GoodsList;
 import com.storage.entity.vo.Producer;
-import com.storage.entity.form.OrderForm;
 import com.storage.entity.form.OrderSelectForm;
 import com.storage.entity.form.StockSelectForm;
 import com.storage.entity.vo.OrderVo;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.UUID;
 
 @Service
 public class StockServiceImpl implements StockService {
@@ -30,9 +29,9 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public Page<OrderVo> selectorder(OrderSelectForm orderSelectForm) {
+    public Page<OrderVo> selectOrder(OrderSelectForm orderSelectForm) {
         PageHelper.startPage(orderSelectForm.getPageNo(),orderSelectForm.getPageSize());
-        Page<OrderVo> orderVoPage=stockMapper.selectorder(orderSelectForm.getCode(),orderSelectForm.getTimeStart(),orderSelectForm.getTimeEnd());
+        Page<OrderVo> orderVoPage=stockMapper.selectOrder(orderSelectForm.getOrderNo(),orderSelectForm.getStatus(),orderSelectForm.getTimeStart(),orderSelectForm.getTimeEnd());
         for(int i=0;i<orderVoPage.size();i++){
             orderVoPage.get(i).setList(stockMapper.selectOrderDetailById(orderVoPage.get(i).getId()));
         }
@@ -52,34 +51,43 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public OrderVo instock(OrderForm orderForm) {
-        String orderno=UUID.randomUUID().toString();
-        stockMapper.insertorder(orderno,orderForm.getUserId(),1);
-        OrderVo orderVo=stockMapper.selectorderbyno(orderno);
+    public void checkhang(OrderForm orderForm) {
+        int checkstatus=0;
         for(int i=0;i<orderForm.getOrderDetailForms().size();i++){
-            stockMapper.insertorderdetail(orderVo.getId(),orderForm.getOrderDetailForms().get(i).getGoodsId(),orderForm.getOrderDetailForms().get(i).getNum());
-            stockMapper.insertstock(orderForm.getOrderDetailForms().get(i).getGoodsId(),orderForm.getOrderDetailForms().get(i).getNum());
+            if(orderForm.getOrderDetailForms().get(i).getNum()<stockMapper.selectUncheckNum(orderForm.getOrderId(),orderForm.getOrderDetailForms().get(i).getGoodsId())){checkstatus++;}
+            //将可以入库的商品入库
+            stockMapper.insertStock(orderForm.getOrderDetailForms().get(i).getGoodsId(),orderForm.getOrderDetailForms().get(i).getNum());
+            //标记未入库的商品数量
+            stockMapper.uncheckNum(orderForm.getOrderDetailForms().get(i).getGoodsId(),orderForm.getOrderDetailForms().get(i).getNum());
         }
-        return orderVo;
+        if(checkstatus>0){
+            stockMapper.updateOrderStatus(orderForm.getOrderId(),2);
+        }else{
+            stockMapper.updateOrderStatus(orderForm.getOrderId(),0);
+        }
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public OrderVo outstock(OrderForm orderForm) {
+    public void instock(OrderForm orderForm) {
+        for(int i=0;i<orderForm.getOrderDetailForms().size();i++){
+            stockMapper.insertStock(orderForm.getOrderDetailForms().get(i).getGoodsId(),orderForm.getOrderDetailForms().get(i).getNum());
+        }
+        stockMapper.updateOrderStatus(orderForm.getOrderId(),0);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void outstock(OrderForm orderForm) {
         //先判断是否超库存量
         for(int i=0;i<orderForm.getOrderDetailForms().size();i++){
-            if(orderForm.getOrderDetailForms().get(i).getNum()>stockMapper.selectnum(orderForm.getOrderDetailForms().get(i).getGoodsId()))
+            if(orderForm.getOrderDetailForms().get(i).getNum()>stockMapper.selectNum(orderForm.getOrderDetailForms().get(i).getGoodsId()))
             throw new RuntimeException("库存不足");
         }
         //再执行出库操作
-        String orderno=UUID.randomUUID().toString();
-        stockMapper.insertorder(orderno,orderForm.getUserId(),-1);
-        OrderVo orderVo=stockMapper.selectorderbyno(orderno);
         for(int j=0;j<orderForm.getOrderDetailForms().size();j++){
-            stockMapper.insertorderdetail(orderVo.getId(),orderForm.getOrderDetailForms().get(j).getGoodsId(),orderForm.getOrderDetailForms().get(j).getNum());
-            stockMapper.deletestock(orderForm.getOrderDetailForms().get(j).getGoodsId(),orderForm.getOrderDetailForms().get(j).getNum());
+            stockMapper.deleteStock(orderForm.getOrderDetailForms().get(j).getGoodsId(),orderForm.getOrderDetailForms().get(j).getNum());
         }
-        return orderVo;
+        stockMapper.updateOrderStatus(orderForm.getOrderId(),-1);
     }
 }

@@ -1,13 +1,12 @@
 package com.storage.entity.vo;
 
-public class OrderDetailVo {
+public class ShopVo {
     private Long id;
     private Long gno;
     private String name;
     private String spec;
     private String unit;
     private Long num;
-    private Long unchecknum;
     private String producer;
 
     public Long getId() {
@@ -56,14 +55,6 @@ public class OrderDetailVo {
 
     public void setNum(Long num) {
         this.num = num;
-    }
-
-    public Long getUnchecknum() {
-        return unchecknum;
-    }
-
-    public void setUnchecknum(Long unchecknum) {
-        this.unchecknum = unchecknum;
     }
 
     public String getProducer() {

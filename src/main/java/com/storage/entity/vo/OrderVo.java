@@ -6,8 +6,10 @@ import java.util.List;
 public class OrderVo {
     private Long id;
     private Date time;
-    private Long orderno;
+    private Long orderNo;
     private String userName;
+    private Long point;
+    private Long status;
     List<OrderDetailVo> list;
 
     public Long getId() {
@@ -26,12 +28,12 @@ public class OrderVo {
         this.time = time;
     }
 
-    public Long getOrderno() {
-        return orderno;
+    public Long getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrderno(Long orderno) {
-        this.orderno = orderno;
+    public void setOrderNo(Long orderNo) {
+        this.orderNo = orderNo;
     }
 
     public String getUserName() {
@@ -40,6 +42,22 @@ public class OrderVo {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Long getPoint() {
+        return point;
+    }
+
+    public void setPoint(Long point) {
+        this.point = point;
+    }
+
+    public Long getStatus() {
+        return status;
+    }
+
+    public void setStatus(Long status) {
+        this.status = status;
     }
 
     public List<OrderDetailVo> getList() {

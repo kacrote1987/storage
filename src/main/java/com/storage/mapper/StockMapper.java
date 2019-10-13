@@ -14,14 +14,14 @@ import java.util.List;
 @Mapper
 public interface StockMapper {
     Page<StockVo> select(String code);
-    Page<OrderVo> selectorder(String code, Date timeStart, Date timeEnd);
+    Page<OrderVo> selectOrder(String orderNo,Long status, Date timeStart, Date timeEnd);
     List<OrderDetailVo> selectOrderDetailById(Long orderId);
-    OrderVo selectorderbyno(String orderno);
     Producer selectproducer();
     GoodsList selectgoods();
-    Long selectnum(Long goodsId);
-    void insertorder(String orderno,Long userId,Integer status);
-    void insertorderdetail(Long orderId,Long goodsId,Long num);
-    void insertstock(Long goodsId,Long num);
-    void deletestock(Long goodsId,Long num);
+    Long selectNum(Long goodsId);
+    void insertStock(Long goodsId,Long num);
+    void deleteStock(Long goodsId,Long num);
+    void uncheckNum(Long goodsId,Long num);
+    Long selectUncheckNum(Long orderId,Long goodsId);
+    void updateOrderStatus(Long orderId,Integer status);
 }

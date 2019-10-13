@@ -1,13 +1,15 @@
 package com.storage.service;
 
 import com.github.pagehelper.Page;
+import com.storage.entity.form.OrderForm;
 import com.storage.entity.vo.GoodsList;
 import com.storage.entity.vo.Producer;
-import com.storage.entity.form.OrderForm;
 import com.storage.entity.form.OrderSelectForm;
 import com.storage.entity.form.StockSelectForm;
 import com.storage.entity.vo.OrderVo;
 import com.storage.entity.vo.StockVo;
+
+import java.util.List;
 
 public interface StockService {
     /**
@@ -15,9 +17,9 @@ public interface StockService {
      */
     Page<StockVo> select(StockSelectForm stockForm);
     /**
-     * 入库查询
+     * 订单查询
      */
-    Page<OrderVo> selectorder(OrderSelectForm orderSelectForm);
+    Page<OrderVo> selectOrder(OrderSelectForm orderSelectForm);
     /**
      * 商品列表
      */
@@ -27,11 +29,15 @@ public interface StockService {
      */
     Producer producerlist();
     /**
-     * 生成订单并入库
+     * 订单挂起
      */
-    OrderVo instock(OrderForm orderForm);
+    void checkhang(OrderForm orderForm);
     /**
-     * 出库并生成出库单
+     * 入库
      */
-    OrderVo outstock(OrderForm orderForm);
+    void instock(OrderForm orderForm);
+    /**
+     * 出库
+     */
+    void outstock(OrderForm orderForm);
 }

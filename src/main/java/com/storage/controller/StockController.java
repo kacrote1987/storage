@@ -40,9 +40,10 @@ public class StockController {
         return Result.success(list);
     }
 
-    @ApiOperation("入库(订单)查询")
+    @ApiOperation("订单查询")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="String", name = "code", value = "商品代码/商品名称（支持模糊查询）", required = true, dataType = "Form"),
+            @ApiImplicitParam(paramType="String", name = "orderNo", value = "订单编号", required = true, dataType = "Form"),
+            @ApiImplicitParam(paramType="Integer", name = "status", value = "订单状态", required = true, dataType = "Form"),
             @ApiImplicitParam(paramType="Date", name = "timeStart", value = "开始日期", required = true, dataType = "Form"),
             @ApiImplicitParam(paramType="Date", name = "timeEnd", value = "结束日期", required = true, dataType = "Form"),
             @ApiImplicitParam(paramType="Integer", name = "pageNo", value = "页数", required = true, dataType = "Form"),
@@ -50,7 +51,7 @@ public class StockController {
     })
     @PostMapping("/selectorder")
     public Result selectorder(@RequestBody OrderSelectForm orderSelectForm){
-        Page<OrderVo> list= stockService.selectorder(orderSelectForm);
+        Page<OrderVo> list= stockService.selectOrder(orderSelectForm);
         return Result.success(list);
     }
 
@@ -68,23 +69,61 @@ public class StockController {
         return Result.success(producerlist);
     }
 
-    @ApiOperation("生成订单并入库")
+    /**
+     * 当入库时发现订单中商品数量或质量出现问题时，可以将没有问题的商品正常入库，有问题的商品进行标记暂不入库，并将该订单挂起，待全部合格则全部入库取消挂起。
+     * @param
+     * @return
+     */
+    @ApiOperation("订单挂起")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="List", name = "orderForm", value = "商品列表", required = true, dataType = "Form")
+            @ApiImplicitParam(paramType="List", name = "orderForm", value = "订单（提交订单中可以入库的商品）", required = true, dataType = "Form")
     })
-    @PostMapping("/instock")
-    public Result instock(@RequestBody OrderForm orderForm){
-        OrderVo orderVo=stockService.instock(orderForm);
-        return Result.success(orderVo);
+    @PostMapping("/checkhang")
+    public Result checkhang(@RequestBody OrderForm orderForm){
+        stockService.checkhang(orderForm);
+        return Result.success();
     }
 
-    @ApiOperation("出库并生成出库单")
+    @ApiOperation("入库")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="List", name = "orderForm", value = "商品列表", required = true, dataType = "Form")
+            @ApiImplicitParam(paramType="List", name = "orderForm", value = "订单", required = true, dataType = "Form")
+    })
+    @PostMapping("/instock")
+    public Result instock(OrderForm orderForm){
+        stockService.instock(orderForm);
+        return Result.success();
+    }
+
+    @ApiOperation("出库")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="List", name = "orderForm", value = "订单", required = true, dataType = "Form")
     })
     @PostMapping("/outstock")
-    public Result outstock(@RequestBody OrderForm orderForm){
-        OrderVo orderVo=stockService.outstock(orderForm);
-        return Result.success(orderVo);
+    public Result outstock(OrderForm orderForm){
+        stockService.outstock(orderForm);
+        return Result.success();
+    }
+
+    /**
+     * 以下未完成
+     * @param
+     * @return
+     */
+    @ApiOperation("库存预警")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="List", name = "planForm", value = "采购计划指标", required = true, dataType = "Form")
+    })
+    @PostMapping("/warning")
+    public Result warning(){
+        return Result.success();
+    }
+
+    @ApiOperation("获取采购单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="List", name = "planForm", value = "采购计划指标", required = true, dataType = "Form")
+    })
+    @PostMapping("/selectpurchase")
+    public Result selectpurchase(){
+        return Result.success();
     }
 }
