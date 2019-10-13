@@ -3,9 +3,7 @@ package com.storage.controller;
 import com.github.pagehelper.Page;
 import com.storage.entity.form.OrderForm;
 import com.storage.entity.form.ShopSelectForm;
-import com.storage.entity.vo.GoodsList;
-import com.storage.entity.vo.Producer;
-import com.storage.entity.vo.ShopVo;
+import com.storage.entity.vo.*;
 import com.storage.service.ShopService;
 import com.storage.util.Result;
 import io.swagger.annotations.Api;
@@ -63,15 +61,53 @@ public class ShopController {
         return Result.success();
     }
 
-    @ApiOperation("零售")
+    @ApiOperation("扫描会员卡获取会员信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="Integer", name = "userId", value = "操作员ID", required = true, dataType = "Integer"),
-            @ApiImplicitParam(paramType="Integer", name = "goodsId", value = "商品ID", required = true, dataType = "Integer"),
-            @ApiImplicitParam(paramType="Integer", name = "num", value = "数量", required = true, dataType = "Integer")
+            @ApiImplicitParam(paramType="String", name = "vipcard", value = "会员卡号", required = true, dataType = "String")
+    })
+    @PostMapping("/scancard")
+    public Result scanCard(String vipCard){
+        CustomerVo customerVo=shopService.scanCard(vipCard);
+        return Result.success(customerVo);
+    }
+
+    @ApiOperation("扫描商品生成订单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="List", name = "orderForm", value = "订单", required = true, dataType = "Form")
+    })
+    @PostMapping("/createorder")
+    public Result createOrder(OrderForm orderForm){
+        OrderVo orderVo=shopService.createOrder(orderForm);
+        return Result.success(orderVo);
+    }
+
+    @ApiOperation("订单取消")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="Integer", name = "orderId", value = "订单ID", required = true, dataType = "Integer")
+    })
+    @PostMapping("/cancel")
+    public Result cancel(Long orderId){
+        shopService.cancel(orderId);
+        return Result.success();
+    }
+
+    @ApiOperation("订单结算")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="List", name = "orderForm", value = "订单", required = true, dataType = "Form")
     })
     @PostMapping("/sale")
-    public Result sale(Long userId,Long goodsId,Long num){
-        shopService.sale(userId,goodsId,num);
+    public Result sale(OrderForm orderForm){
+        shopService.sale(orderForm);
+        return Result.success();
+    }
+
+    @ApiOperation("打印订单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="List", name = "orderForm", value = "订单", required = true, dataType = "Form")
+    })
+    @PostMapping("/printorder")
+    public Result printorder(OrderForm orderForm){
+        shopService.printorder(orderForm);
         return Result.success();
     }
 }

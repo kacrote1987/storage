@@ -25,7 +25,23 @@ public interface ShopService {
      */
     void supply(OrderForm orderForm);
     /**
-     * 零售
+     * 扫描会员卡获取会员信息
      */
-    void sale(Long userId,Long goodsId,Long num);
+    CustomerVo scanCard(String vipCard);
+    /**
+     * 扫描商品生成订单
+     */
+    OrderVo createOrder(OrderForm orderForm);
+    /**
+     * 取消订单
+     */
+    void cancel(Long orderId);
+    /**
+     * 订单结算
+     */
+    void sale(OrderForm orderForm);
+    /**
+     * 订单打印
+     */
+    void printorder(OrderForm orderForm);
 }
