@@ -106,8 +106,19 @@ public class ShopController {
             @ApiImplicitParam(paramType="List", name = "orderForm", value = "订单", required = true, dataType = "Form")
     })
     @PostMapping("/printorder")
-    public Result printorder(OrderForm orderForm){
-        shopService.printorder(orderForm);
+    public Result printOrder(OrderForm orderForm){
+        shopService.printOrder(orderForm);
+        return Result.success();
+    }
+
+    /**
+     * 未完成
+     */
+    @ApiOperation("商品回收")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/rollback")
+    public Result rollBack(){
         return Result.success();
     }
 }

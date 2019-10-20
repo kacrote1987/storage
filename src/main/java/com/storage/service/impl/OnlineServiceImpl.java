@@ -33,61 +33,63 @@ public class OnlineServiceImpl implements OnlineService {
     }
 
     @Override
-    public Page<GoodsVo> selectgoods(GoodsForm goodsForm) {
+    public Page<GoodsVo> selectGoods(GoodsForm goodsForm) {
         PageHelper.startPage(goodsForm.getPageNo(),goodsForm.getPageSize());
         Page<GoodsVo> goodsVoPage=onlineMapper.selectGoods(goodsForm.getDictId(),goodsForm.getName(),goodsForm.getVipDiscount());
         return goodsVoPage;
     }
 
     @Override
-    public void insertcart(Long customerId,Long goodsId,Long num) {
-        String bl=onlineMapper.selectone(customerId,goodsId);
+    public void insertCart(Long customerId,Long goodsId,Long num) {
+        String bl=onlineMapper.selectOne(customerId,goodsId);
         if(bl==null){
-            onlineMapper.insertcart(customerId,goodsId,num);
+            onlineMapper.insertCart(customerId,goodsId,num);
         }else{
-            onlineMapper.pluscart(customerId,goodsId,num);
+            onlineMapper.plusCart(customerId,goodsId,num);
         }
     }
 
     @Override
-    public void deletecart(Long customerId, Long goodsId,Long num) {
-        String bl=onlineMapper.selectone(customerId,goodsId);
+    public void deleteCart(Long customerId, Long goodsId,Long num) {
+        String bl=onlineMapper.selectOne(customerId,goodsId);
         if(bl==num.toString()){
-            onlineMapper.deletecart(customerId,goodsId);
+            onlineMapper.deleteCart(customerId,goodsId);
         }else{//减少数字num的最大值应该在页面上控制为大于0，小于等于购物车中该商品的最大值。因此else中只包含小于num的情况。
-            onlineMapper.minuscart(customerId,goodsId,num);
+            onlineMapper.minusCart(customerId,goodsId,num);
         }
     }
 
     @Override
-    public CartVo selectcart(Long customerId) {
-        CartVo cartVo=onlineMapper.selectcart(customerId,onlineMapper.getDiscount(customerId));
+    public CartVo selectCart(Long customerId) {
+        CartVo cartVo=onlineMapper.selectCart(customerId,onlineMapper.getDiscount(customerId));
         return cartVo;
     }
 
     @Override
-    public void createorder(CartForm cartForm) {
+    public void createOrder(CartForm cartForm) {
         String orderNo=UUID.randomUUID().toString();
         onlineMapper.createOrder(orderNo,cartForm.getCustomerId(),2,-1,-1);
         Long orderId=onlineMapper.getOrderId(orderNo);
         for(int i=0;i<cartForm.getList().size();i++){
             onlineMapper.createOrderDetail(orderId,cartForm.getList().get(i).getId(),cartForm.getList().get(i).getNum());
         }
+        //计算订单总价并更新
+        onlineMapper.updatePrice(orderId);
     }
 
     @Override
-    public void updatescore(CartForm cartForm) {
+    public void updateScore(CartForm cartForm) {
         Long customerId=cartForm.getCustomerId();
         for(int i=0;i<cartForm.getList().size();i++){
             //更新用户积分
-            onlineMapper.updatescore(customerId,cartForm.getList().get(i).getId(),cartForm.getList().get(i).getNum());
+            onlineMapper.updateScore(customerId,cartForm.getList().get(i).getId(),cartForm.getList().get(i).getNum());
         }
         //更新VIP等级
-        onlineMapper.updatevip(customerId);
+        onlineMapper.updateVip(customerId);
     }
 
     @Override
-    public OrderVo myorder(Long customerId) {
+    public OrderVo myOrder(Long customerId) {
         OrderVo orderVo=onlineMapper.selectMyorder(customerId);
         orderVo.setList(onlineMapper.selectMyorderDetail(orderVo.getId()));
         return orderVo;

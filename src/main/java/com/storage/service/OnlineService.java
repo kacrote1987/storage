@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.storage.entity.form.CartForm;
 import com.storage.entity.form.GoodsForm;
 import com.storage.entity.form.LoginForm;
-import com.storage.entity.form.OrderForm;
 import com.storage.entity.vo.*;
 
 public interface OnlineService {
@@ -15,29 +14,29 @@ public interface OnlineService {
     /**
      * 商品查询
      */
-    Page<GoodsVo> selectgoods(GoodsForm goodsForm);
+    Page<GoodsVo> selectGoods(GoodsForm goodsForm);
     /**
      * 加入购物车
      */
-    void insertcart(Long customerId,Long goodsId,Long num);
+    void insertCart(Long customerId,Long goodsId,Long num);
     /**
      * 移除购物车
      */
-    void deletecart(Long customerId,Long goodsId,Long num);
+    void deleteCart(Long customerId,Long goodsId,Long num);
     /**
      * 查询购物车
      */
-    CartVo selectcart(Long customerId);
+    CartVo selectCart(Long customerId);
     /**
      * 生成订单
      */
-    void createorder(CartForm cartForm);
+    void createOrder(CartForm cartForm);
     /**
      * 积分更新
      */
-    void updatescore(CartForm cartForm);
+    void updateScore(CartForm cartForm);
     /**
      * 个人订单查询
      */
-    OrderVo myorder(Long customerId);
+    OrderVo myOrder(Long customerId);
 }

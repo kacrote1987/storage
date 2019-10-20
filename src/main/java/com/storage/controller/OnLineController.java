@@ -50,8 +50,8 @@ public class OnLineController {
             @ApiImplicitParam(paramType="Integer", name = "pageSize", value = "每页显示记录数", required = true, dataType = "Form")
     })
     @PostMapping("/selectgoods")
-    public Result selectgoods(@RequestBody GoodsForm goodsForm){
-        Page<GoodsVo> list= onlineService.selectgoods(goodsForm);
+    public Result selectGoods(@RequestBody GoodsForm goodsForm){
+        Page<GoodsVo> list= onlineService.selectGoods(goodsForm);
         return Result.success(list);
     }
 
@@ -62,8 +62,8 @@ public class OnLineController {
             @ApiImplicitParam(paramType="Integer", name = "goodsId", value = "商品ID", required = true, dataType = "Integer"),
             @ApiImplicitParam(paramType="Integer", name = "num", value = "商品数量", required = true, dataType = "Integer")
     })
-    public Result insertcart(Long customerId,Long goodsId,Long num){
-        onlineService.insertcart(customerId,goodsId,num);
+    public Result insertCart(Long customerId,Long goodsId,Long num){
+        onlineService.insertCart(customerId,goodsId,num);
         return Result.success();
     }
 
@@ -74,8 +74,8 @@ public class OnLineController {
             @ApiImplicitParam(paramType="Integer", name = "goodsId", value = "商品ID", required = true, dataType = "Integer"),
             @ApiImplicitParam(paramType="Integer", name = "num", value = "商品数量", required = true, dataType = "Integer")
     })
-    public Result deletecart(Long customerId,Long goodsId,Long num){
-        onlineService.deletecart(customerId,goodsId,num);
+    public Result deleteCart(Long customerId,Long goodsId,Long num){
+        onlineService.deleteCart(customerId,goodsId,num);
         return Result.success();
     }
 
@@ -84,8 +84,8 @@ public class OnLineController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="Integer", name = "customerId", value = "客户ID", required = true, dataType = "Integer")
     })
-    public Result selectorder(Long customerId){
-        CartVo cartVo= onlineService.selectcart(customerId);
+    public Result selectCart(Long customerId){
+        CartVo cartVo= onlineService.selectCart(customerId);
         return Result.success(cartVo);
     }
 
@@ -98,8 +98,8 @@ public class OnLineController {
         /**
          * 省略支付步骤
          */
-        onlineService.createorder(cartForm);//创建订单
-        onlineService.updatescore(cartForm);//积分更新
+        onlineService.createOrder(cartForm);//创建订单
+        onlineService.updateScore(cartForm);//积分更新
         return Result.success();
     }
 
@@ -108,8 +108,8 @@ public class OnLineController {
             @ApiImplicitParam(paramType="Integer", name = "customerId", value = "客户ID", required = true, dataType = "Integer")
     })
     @PostMapping("/myorder")
-    public Result myorder(Long customerId){
-        OrderVo orderVo=onlineService.myorder(customerId);
+    public Result myOrder(Long customerId){
+        OrderVo orderVo=onlineService.myOrder(customerId);
         return Result.success(orderVo);
     }
 }

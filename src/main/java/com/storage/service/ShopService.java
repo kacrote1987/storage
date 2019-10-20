@@ -43,5 +43,9 @@ public interface ShopService {
     /**
      * 订单打印
      */
-    void printorder(OrderForm orderForm);
+    void printOrder(OrderForm orderForm);
+    /**
+     * 商品回收
+     */
+    void rollBack(OrderForm orderForm);
 }

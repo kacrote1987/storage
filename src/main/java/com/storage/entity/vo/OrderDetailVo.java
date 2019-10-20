@@ -7,8 +7,10 @@ public class OrderDetailVo {
     private String spec;
     private String unit;
     private Long num;
-    private Long unchecknum;
     private String producer;
+    private Long priceSale;
+    private Long priceVip;
+    private Long unchecknum;
 
     public Long getId() {
         return id;
@@ -58,19 +60,35 @@ public class OrderDetailVo {
         this.num = num;
     }
 
-    public Long getUnchecknum() {
-        return unchecknum;
-    }
-
-    public void setUnchecknum(Long unchecknum) {
-        this.unchecknum = unchecknum;
-    }
-
     public String getProducer() {
         return producer;
     }
 
     public void setProducer(String producer) {
         this.producer = producer;
+    }
+
+    public Long getPriceSale() {
+        return priceSale;
+    }
+
+    public void setPriceSale(Long priceSale) {
+        this.priceSale = priceSale;
+    }
+
+    public Long getPriceVip() {
+        return priceVip;
+    }
+
+    public void setPriceVip(Long priceVip) {
+        this.priceVip = priceVip;
+    }
+
+    public Long getUnchecknum() {
+        return unchecknum;
+    }
+
+    public void setUnchecknum(Long unchecknum) {
+        this.unchecknum = unchecknum;
     }
 }

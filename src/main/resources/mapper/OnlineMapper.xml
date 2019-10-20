@@ -16,26 +16,26 @@
     <select id="selecalltcart">
         select * from t_cart where customer_id=#{id}
     </select>
-    <select id="selectone">
+    <select id="selectOne">
         select num from t_cart where customer_id=#{customerId} and goods_id=#{goodsId}
     </select>
-    <insert id="insertcart">
+    <insert id="insertCart">
         insert into t_cart(customer_id,goods_id,num) values(#{customerId},#{goodsId},#{num})
     </insert>
-    <update id="pluscart">
+    <update id="plusCart">
         update t_cart set num=num+#{num} where customer_id=#{customerId} and goods_id=#{goodsId}
     </update>
-    <delete id="deletecart">
+    <delete id="deleteCart">
         delete from t_cart where customer_id=#{customerId} and goods_id=#{goodsId}
     </delete>
-    <update id="minuscart">
+    <update id="minusCart">
         update t_cart set num=num-#{num} where customer_id=#{customerId} and goods_id=#{goodsId}
     </update>
     <select id="getDiscount">
         select b.discount from t_customer a inner join t_vip b on a.vipid=b.id where a.customer_id=#{customerId}
     </select>
-    <select id="selectcart">
-        select a.customer_id,a.goods_id,c.name,b.gno,b.name,b.spec,d.name,b.unit,b.price_sale,b.price_sale*#{disCount} from t_cart a inner join t_goods b on a.goods_id=b.id inner join t_dictionary c on b.dict_id=c.id inner join t_producer d on b.pro_id=d.id where a.customer_id=#{id}
+    <select id="selectCart">
+        select a.customer_id,a.goods_id,c.name,b.gno,b.name,b.spec,d.name,b.unit,b.price_sale,b.price_sale*#{disCount} as price_vip from t_cart a inner join t_goods b on a.goods_id=b.id inner join t_dictionary c on b.dict_id=c.id inner join t_producer d on b.pro_id=d.id where a.customer_id=#{id}
     </select>
     <insert id="createOrder">
         insert into t_order(orderno,time,user_id,user_type,point,status) values(#{orderNo},sysdate,#{customerId},#{customerType},#{point},#{status})
@@ -46,16 +46,22 @@
     <insert id="createOrderDetail">
         insert into t_orderdetail(order_id,goods_id,num) values(#{orderId},#{goodsId},#{num})
     </insert>
+    <update id="updatePrice">
+        update t_order set
+        price_sale=(select sum(b.price_sale*a.num) from t_orderdetail a inner join t_goods b on a.goods_id=b.id where a.order_id=#{orderId}),
+        price_vip=(select sum(b.price_sale*a.num*#{disCount}) from t_orderdetail a inner join t_goods b on a.goods_id=b.id where a.order_id=#{orderId})
+        where order_id=#{orderId}
+    </update>
     <select id="selectMyorder" resultType="com.storage.entity.vo.OrderVo">
         select * from t_order where user_type=2 and user_id=#{customerId}
     </select>
     <select id="selectMyorderDetail" resultType="com.storage.entity.vo.OrderDetailVo">
         select * from t_orderdetail where user_id=#{orderId}
     </select>
-    <update id="updatescore">
+    <update id="updateScore">
         update t_customer set score=score+(select score from t_goods where id=#{goodsId})*#{num} where id=#{customerId}
     </update>
-    <update id="updatevip">
+    <update id="updateVip">
         update t_customer a set vipid=(select max(b.id) from t_vip b where b.score_min<=a.score) where id=#{customerId}
     </update>
 </mapper>

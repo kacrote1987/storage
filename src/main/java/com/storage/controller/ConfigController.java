@@ -18,8 +18,7 @@ public class ConfigController {
 
     /**
      * 将库存中的商品ID同步到门店中，并将数量初始化为0.(未完成)
-     * @param
-     * @return
+     * 考虑是否存在不同门店所需的商品种类不同？
      */
     @ApiOperation("商品列表初始化")
     @PostMapping("/initialization")

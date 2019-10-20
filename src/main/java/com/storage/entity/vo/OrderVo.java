@@ -8,6 +8,8 @@ public class OrderVo {
     private Date time;
     private Long orderNo;
     private String userName;
+    private Long priceSale;
+    private Long priceVip;
     private Long point;
     private Long status;
     List<OrderDetailVo> list;
@@ -42,6 +44,22 @@ public class OrderVo {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Long getPriceSale() {
+        return priceSale;
+    }
+
+    public void setPriceSale(Long priceSale) {
+        this.priceSale = priceSale;
+    }
+
+    public Long getPriceVip() {
+        return priceVip;
+    }
+
+    public void setPriceVip(Long priceVip) {
+        this.priceVip = priceVip;
     }
 
     public Long getPoint() {
