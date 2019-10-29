@@ -11,13 +11,13 @@ import java.util.List;
 
 @Mapper
 public interface PlanMapper {
-    List<PlanVo> selectAllBranch();
+    List<PlanVo> selectPlanBranch();
     List<PlanBranchVo> selectGoodsList(Long branchId, Date dateBegin, Date dateEnd);
     void deleteStockNumMin();
     void deleteShopNumMin();
     void updateStockNumMin(Long goodsId,Long numMin);
     void updateShopNumMin(Long branchId,Long goodsId,Long numMin);
-    List<PurchaseVo> selectBranch();
+    List<PurchaseVo> selectPurchaseBranch();
     List<GoodsVo> selectPurchaseGoodsList(Long branchId);
     List<GoodsVo> createStockPurchase();
 }

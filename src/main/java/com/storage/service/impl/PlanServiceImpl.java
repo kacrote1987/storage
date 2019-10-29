@@ -21,11 +21,10 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public List<PlanVo> DemandAnalysis(PlanDemandForm planDemandForm) {
-        List<PlanVo> planVoList=planMapper.selectAllBranch();
+        List<PlanVo> planVoList=planMapper.selectPlanBranch();//总部不能算进去
         for(int i=0;i<planVoList.size();i++){
-            //创建planBranchVoList
+            //创建planBranchVoList，并查询这个时间段的销售数量
             List<PlanBranchVo> planBranchVoList=planMapper.selectGoodsList(planVoList.get(i).getBranchId(),planDemandForm.getDateBegin(),planDemandForm.getDateEnd());
-            //查询各类商品上一时间段的数量
             //先求时间差
             int datediff = (int) ((planDemandForm.getDateEnd().getTime() - planDemandForm.getDateBegin().getTime()) / (1000*3600*24)) * (-1);
             Calendar cal = Calendar.getInstance();
@@ -33,8 +32,9 @@ public class PlanServiceImpl implements PlanService {
             //再求上个开始日期
             cal.add(Calendar.DAY_OF_MONTH, datediff);
             Date lastDateBegin=cal.getTime();
-
+            //查询上个时间段的销售数量
             List<PlanBranchVo> lastPlanBranchVoList=planMapper.selectGoodsList(planVoList.get(i).getBranchId(),lastDateBegin,planDemandForm.getDateBegin());
+            //计算出增长率，及下个时间段的预计销售数量
             for(int j=0;j<planBranchVoList.size();j++){
                 planBranchVoList.get(j).setBranchLastNum(lastPlanBranchVoList.get(j).getBranchNum());
                 planBranchVoList.get(j).setIncreaseRate(planBranchVoList.get(j).getBranchNum()/planBranchVoList.get(j).getBranchLastNum()-1);
@@ -64,7 +64,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public List<PurchaseVo> CreatePurchase() {
         //加入需要采购的部门信息
-        List<PurchaseVo> purchaseVoList=planMapper.selectBranch();
+        List<PurchaseVo> purchaseVoList=planMapper.selectPurchaseBranch();
         for(int i=0;i<purchaseVoList.size();i++){//生成各门店采购计划
             purchaseVoList.get(i).setGoodsVoList(planMapper.selectPurchaseGoodsList(purchaseVoList.get(i).getBranchId()));
         }
