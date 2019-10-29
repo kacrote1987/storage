@@ -5,6 +5,7 @@ import com.storage.entity.form.PlanWarningForm;
 import com.storage.entity.vo.PlanBranchVo;
 import com.storage.entity.vo.PlanVo;
 import com.storage.entity.vo.PurchaseVo;
+import com.storage.entity.vo.RecoveryVo;
 import com.storage.mapper.PlanMapper;
 import com.storage.service.PlanService;
 import org.springframework.stereotype.Service;
@@ -76,7 +77,13 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    public List<RecoveryVo> Recovery() {
+        return null;
+    }
+
+    @Override
     public void CreateReport() {
 
     }
+
 }

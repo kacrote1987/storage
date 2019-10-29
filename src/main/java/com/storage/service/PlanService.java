@@ -4,6 +4,7 @@ import com.storage.entity.form.PlanDemandForm;
 import com.storage.entity.form.PlanWarningForm;
 import com.storage.entity.vo.PlanVo;
 import com.storage.entity.vo.PurchaseVo;
+import com.storage.entity.vo.RecoveryVo;
 
 import java.util.List;
 
@@ -20,6 +21,10 @@ public interface PlanService {
      * 生成采购计划
      */
     List<PurchaseVo> CreatePurchase();
+    /**
+     * 商品召回
+     */
+    List<RecoveryVo> Recovery();
     /**
      * 生成报表
      */

@@ -4,6 +4,7 @@ import com.storage.entity.form.PlanDemandForm;
 import com.storage.entity.form.PlanWarningForm;
 import com.storage.entity.vo.PlanVo;
 import com.storage.entity.vo.PurchaseVo;
+import com.storage.entity.vo.RecoveryVo;
 import com.storage.service.PlanService;
 import com.storage.util.Result;
 import io.swagger.annotations.Api;
@@ -62,6 +63,13 @@ public class PlanController {
     public Result CreatePurchase(){
         List<PurchaseVo> purchaseVoList=planService.CreatePurchase();
         return Result.success(purchaseVoList);
+    }
+
+    @ApiOperation("商品召回")
+    @PostMapping("/recovery")
+    public Result Recovery(){
+        List<RecoveryVo> recoveryVoList=planService.Recovery();
+        return Result.success(recoveryVoList);
     }
 
     @ApiOperation("生成其他报表")
