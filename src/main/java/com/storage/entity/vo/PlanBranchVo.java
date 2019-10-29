@@ -3,11 +3,15 @@ package com.storage.entity.vo;
 public class PlanBranchVo {
     private Long goodsId;
     private String goodsName;
-    private Long totalNum;
+    private Long branchNum;
     private String unit;
-    private  Long totalCost;
-    private Long totalIncome;
+    private Long branchCost;
+    private Long branchIncome;
     private Long branchProfit;
+
+    private Long branchLastNum;
+    private Long increaseRate;
+    private Long nextNum;
 
     public Long getGoodsId() {
         return goodsId;
@@ -25,12 +29,12 @@ public class PlanBranchVo {
         this.goodsName = goodsName;
     }
 
-    public Long getTotalNum() {
-        return totalNum;
+    public Long getBranchNum() {
+        return branchNum;
     }
 
-    public void setTotalNum(Long totalNum) {
-        this.totalNum = totalNum;
+    public void setBranchNum(Long branchNum) {
+        this.branchNum = branchNum;
     }
 
     public String getUnit() {
@@ -41,20 +45,20 @@ public class PlanBranchVo {
         this.unit = unit;
     }
 
-    public Long getTotalCost() {
-        return totalCost;
+    public Long getBranchCost() {
+        return branchCost;
     }
 
-    public void setTotalCost(Long totalCost) {
-        this.totalCost = totalCost;
+    public void setBranchCost(Long branchCost) {
+        this.branchCost = branchCost;
     }
 
-    public Long getTotalIncome() {
-        return totalIncome;
+    public Long getBranchIncome() {
+        return branchIncome;
     }
 
-    public void setTotalIncome(Long totalIncome) {
-        this.totalIncome = totalIncome;
+    public void setBranchIncome(Long branchIncome) {
+        this.branchIncome = branchIncome;
     }
 
     public Long getBranchProfit() {
@@ -63,5 +67,29 @@ public class PlanBranchVo {
 
     public void setBranchProfit(Long branchProfit) {
         this.branchProfit = branchProfit;
+    }
+
+    public Long getBranchLastNum() {
+        return branchLastNum;
+    }
+
+    public void setBranchLastNum(Long branchLastNum) {
+        this.branchLastNum = branchLastNum;
+    }
+
+    public Long getIncreaseRate() {
+        return increaseRate;
+    }
+
+    public void setIncreaseRate(Long increaseRate) {
+        this.increaseRate = increaseRate;
+    }
+
+    public Long getNextNum() {
+        return nextNum;
+    }
+
+    public void setNextNum(Long nextNum) {
+        this.nextNum = nextNum;
     }
 }

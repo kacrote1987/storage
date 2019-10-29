@@ -51,8 +51,7 @@ public class PlanController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="Integer", name = "branchId", value = "部门ID", required = true, dataType = "PlanForm"),
             @ApiImplicitParam(paramType="Integer", name = "goodsId", value = "商品ID", required = true, dataType = "PlanForm"),
-            @ApiImplicitParam(paramType="Integer", name = "saleNum", value = "商品当前销售量", required = true, dataType = "PlanForm"),
-            @ApiImplicitParam(paramType="Float", name = "increaseRate", value = "增长率", required = true, dataType = "PlanForm"),
+            @ApiImplicitParam(paramType="Integer", name = "nextNum", value = "商品预计销售量", required = true, dataType = "PlanForm"),
             @ApiImplicitParam(paramType="Integer", name = "otherParameter", value = "其他参数指标", required = true, dataType = "PlanForm")
     })
     @PostMapping("/updatewarning")
