@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * 该模块未完成
- */
 @Api(description = "采购计划管理")
 @RestController
 @RequestMapping("/plan")
