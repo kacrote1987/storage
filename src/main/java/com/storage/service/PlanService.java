@@ -26,7 +26,7 @@ public interface PlanService {
      */
     List<RecoveryVo> Recovery();
     /**
-     * 生成报表
+     * 生成其他报表
      */
     void CreateReport();
 }
