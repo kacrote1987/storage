@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/config")
 public class ConfigController {
-    @Resource
+    //@Resource
     //ConfigService configService;
 
     /**
