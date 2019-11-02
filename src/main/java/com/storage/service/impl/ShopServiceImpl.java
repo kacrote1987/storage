@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -93,9 +92,12 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void printorder(OrderForm orderForm) {
-        /**
-         * 订单打印功能未完成
-         */
+    public void printOrder(OrderForm orderForm) {
+
+    }
+
+    @Override
+    public void rollBack(OrderForm orderForm) {
+
     }
 }
