@@ -54,6 +54,6 @@
         update t_customer set score=score+(select score from t_goods where goods_id=#{goodsId})*num where id=#{customerId}
     </update>
     <update id="updatevip">
-        update t_customer a set vipid=(select max(b.id) from t_vip b where b.score_min<=a.score) where id=#{customerId}
+        update t_customer a set vipid=(select max(b.id) from t_vip b where b.score_min&lt;=a.score) where id=#{customerId}
     </update>
 </mapper>

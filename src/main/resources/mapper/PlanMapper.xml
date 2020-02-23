@@ -5,7 +5,7 @@
         select id,name from t_branch where id!=1
     </select>
     <select id="selectGoodsList" resultType="PlanBranchVo">
-        select * from t_order a inner join t_orderdetail b on a.id=b.order_id inner join t_user c on a.user_id=c.id where a.branch_id=#{branchId} and a.time>=#{dateBegin} and a.time<=#{dateEnd}
+        select * from t_order a inner join t_orderdetail b on a.id=b.order_id inner join t_user c on a.user_id=c.id where a.branch_id=#{branchId} and a.time&gt;=#{dateBegin} and a.time&lt;=#{dateEnd}
     </select>
     <update id="deleteStockNumMin">
         update t_stock set num_min=0
@@ -23,9 +23,9 @@
         select id,name from t_branch where id!=1
     </select>
     <select id="selectPurchaseGoodsList" resultType="GoodsVo">
-        select b.*,a.num_min-num as num from t_shop a inner join t_goods b on a.goods_id=b.id where a.branch_id=#{branchId} and a.num<a.num_min
+        select b.*,a.num_min-num as num from t_shop a inner join t_goods b on a.goods_id=b.id where a.branch_id=#{branchId} and a.num&lt;a.num_min
     </select>
     <select id="createStockPurchase" resultType="GoodsVo">
-        select b.*,a.num_min-num as num from t_stock a inner join t_goods b on a.goods_id=b.id where a.num<a.num_min
+        select b.*,a.num_min-num as num from t_stock a inner join t_goods b on a.goods_id=b.id where a.num&lt;a.num_min
     </select>
 </mapper>
