@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybaselectByUsernametiselectUsers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisionweb.mapper.HomeMapper">
+    <select id="noticeList" resultType="com.wisionweb.entity.NoticeListForm" >
+        select a.notice_id,b.type_name,a.notice_name,a.notice_content,date(a.notice_time) as notice_time from t_notice_main a
+        left join t_notice_type b on a.type_id=b.type_id where a.type_id=#{typeId} and a.notice_state is null
+        <if test="noticeName!=null and noticeName!=''">
+            and a.notice_name like '%' #{noticeName} '%'
+        </if>
+        order by a.notice_time desc
+    </select>
+    <select id="selOneFileLink" resultType="String" >
+        select file_link from t_notice_file where notice_id=#{noticeId} order by file_time limit 1
+    </select>
+    <select id="noticeDet" resultType="com.wisionweb.entity.NoticeDetForm" >
+        select a.notice_id,b.type_name,a.notice_name,a.notice_content,date(a.notice_time) as notice_time
+        from t_notice_main a left join t_notice_type b on a.type_id=b.type_id where a.type_id=#{typeId} and a.notice_id=#{noticeId}
+    </select>
+    <select id="selFileList" resultType="com.wisionweb.entity.FileListForm" >
+        select file_id,file_link from t_notice_file where notice_id=#{noticeId}
+    </select>
+    <select id="infoDet" resultType="com.wisionweb.entity.InfoDetForm" >
+        select info_id,info_content,info_tel,info_mail,info_qrcode,info_logo,info_pic from t_info_main order by info_time desc
+        limit 1
+    </select>
+</mapper>

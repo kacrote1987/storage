@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>全端复杂组合</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<style>
+    /* 这段样式只是用于演示 */
+    #LAY-component-grid-all .layui-card-body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        height: 200px;
+    }
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <table class="layui-table">
+                        <tr>
+                            <th colspan="3" style="width: 5%;height: 100px;text-align: center;background-color: lightgray"><b>入口</b></th>
+                            <th colspan="3" style="width: 70%;background-color:lightblue">
+                                <table>
+                                    <tr>浙政钉</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>浙里办</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>微信小程序</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>移动端</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>驾驶舱</tr>
+                                </table>
+                            </th>
+                            <th rowspan="9" style="width: 1%">&nbsp;</th>
+                            <th rowspan="9" style="width: 1%;background-color: lightblue"><b>政策制度体系</b></th>
+                            <th rowspan="9" style="width: 1%">&nbsp;</th>
+                            <th rowspan="9" style="width: 1%;background-color: lightblue"><b>标准规范体系</b></th>
+                            <th rowspan="9" style="width: 1%">&nbsp;</th>
+                            <th rowspan="9" style="width: 1%;background-color: lightblue"><a href="../org/index.html" target="_blank"><b>组织保障体系</b></a></th>
+                            <th rowspan="9" style="width: 1%">&nbsp;</th>
+                            <th rowspan="9" style="width: 1%;background-color: lightblue"><b>网络安全体系</b></th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">&nbsp;</th>
+                            <th colspan="3">&nbsp;</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="height: 100px;text-align: center;background-color: lightgray"><a href="../proj/index.html" target="_blank"><b>业务应用体系</b></a></th>
+                            <th colspan="3" style="background-color:lightblue">
+                                <table>
+                                    <tr>党政机关整体智治</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>数字政府</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>数字法制</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>数字经济</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>数字社会</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>数字文化</tr>
+                                </table>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">&nbsp;</th>
+                            <th colspan="3">&nbsp;</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="height: 100px;text-align: center;background-color: lightgray"><b><a href="../supp/index.html" target="_blank">应用支撑体系</a></b></th>
+                            <th colspan="3" style="background-color: lightblue">
+                                <table>
+                                    <tr>产品管理</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>组件管理</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr><a href="../api/index.html" target="_blank">外部接口</a></tr>
+                                </table>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">&nbsp;</th>
+                            <th colspan="3">&nbsp;</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="height: 100px;text-align: center;background-color: lightgray"><b><a href="../data/index.html" target="_blank">数据资源体系</a></b></th>
+                            <th colspan="3" style="background-color: lightblue">
+                                <table>
+                                    <tr>基础数据库</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>主题数据库</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>专题数据库</tr>
+                                </table>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">&nbsp;</th>
+                            <th colspan="3">&nbsp;</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="height: 100px;text-align: center;background-color: lightgray"><b><a href="../iot/index.html" target="_blank">基础设施体系</a></b></th>
+                            <th colspan="3" style="background-color: lightblue">
+                                <table>
+                                    <tr>基础网络</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>统一网关</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>|</tr>
+                                    <tr>&nbsp;</tr>
+                                    <tr>云资源管理</tr>
+                                </table>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table'], function () {
+        var table = layui.table;
+
+        table.init('test-table-thead1', {
+            url: layui.setter.base + 'json/table/demo2.js'
+        });
+
+        table.init('test-table-thead2', {
+            url: layui.setter.base + 'json/table/demo2.js'
+        });
+
+    });
+</script>
+</body>
+</html>
