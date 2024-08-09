@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybaselectByUsernametiselectUsers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisionweb.mapper.ManageMapper">
+    <select id="login" resultType="com.wisionweb.entity.UserListForm" >
+        select user_id,user_code,user_name from t_user_main where user_code=#{userCode} and user_pwd=#{userPwd} and user_state='1'
+    </select>
+    <insert id="insertFile">
+        insert into t_notice_file(notice_id,file_link,file_time)
+        values(#{noticeId},#{fileLink},now())
+    </insert>
+    <insert id="insertNotice">
+        insert into t_notice_main(notice_name,notice_content,notice_time)
+        values(#{params.noticeName},#{params.noticeContent},now())
+    </insert>
+    <select id="selNewNoticeId" resultType="Long" >
+        select notice_id from t_notice_main where notice_name=#{noticeName} order by notice_time desc limit 1
+    </select>
+    <insert id="insertPic">
+        insert into t_pic_main(notice_id,pic_link,pic_time)
+        values(#{params.noticeName},#{params.noticeContent},now())
+    </insert>
+    <update id="updateNotice">
+        update t_notice_main set notice_name=#{params.noticeName},notice_content=#{params.noticeContent}
+        ,notice_time=now() where notice_id=#{params.noticeId}
+    </update>
+    <update id="updatePic">
+        update t_pic_main set pic_link=#{picLink},notice_time=now() where notice_id=#{noticeId}
+    </update>
+    <select id="checkNoticeId" resultType="Long" >
+        select notice_id from t_notice_main where notice_state is null and notice_id=#{noticeId}
+    </select>
+    <update id="deleteNotice">
+        update t_notice_main set notice_state='-1' where notice_id=#{noticeId}
+    </update>
+    <update id="updateInfo">
+        update t_info_main set info_content=#{params.infoContent},info_tel=#{params.infoTel},info_mail=#{params.infoMail}
+        ,info_qrcode=#{params.infoQrcode},info_logo=#{params.infoLogo},info_pic=#{params.infoPic},info_time=now()
+        limit 1
+    </update>
+</mapper>
