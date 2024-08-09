@@ -27,7 +27,7 @@ public class AppConfig implements WebMvcConfigurer {
                 "/manage/login",
                 "/home/homelist",
                 "/home/index")
-                .addPathPatterns("");  //     /**
+                .addPathPatterns("/**");
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
