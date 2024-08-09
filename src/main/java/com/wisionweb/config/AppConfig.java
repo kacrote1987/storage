@@ -24,7 +24,9 @@ public class AppConfig implements WebMvcConfigurer {
                 "/",
                 "",
                 "/index",
-                "/manage/login")
+                "/manage/login",
+                "/home/homelist",
+                "/home/index")
                 .addPathPatterns("/**");
     }
     @Override
