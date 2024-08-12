@@ -22,6 +22,6 @@ public class MinioTest {
     @Test
     public void test(){
         boolean exist = minioUtil.bucketExists("test");
-        System.out.println(exist);
+        assert  exist = true;
     }
 }

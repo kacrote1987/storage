@@ -4,7 +4,6 @@ import com.wisionweb.config.MinIoClientConfig;
 import io.minio.*;
 import io.minio.http.Method;
 import io.minio.messages.Bucket;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -18,11 +17,11 @@ import java.util.UUID;
 
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
-@Data
-class ObjectItem {
-    private String objectName;
-    private Long size;
-}
+//@Data
+//class ObjectItem {
+//    private String objectName;
+//    private Long size;
+//}
 
 /**
  * @description:

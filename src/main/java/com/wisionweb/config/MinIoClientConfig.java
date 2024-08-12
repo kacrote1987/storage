@@ -1,13 +1,12 @@
 package com.wisionweb.config;
 
 import io.minio.MinioClient;
+
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-
 @Data
 @Configuration
 public class MinIoClientConfig {
