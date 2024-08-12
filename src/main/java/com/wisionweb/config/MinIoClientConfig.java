@@ -1,13 +1,11 @@
 package com.wisionweb.config;
 
 import io.minio.MinioClient;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Data
-@Component
+@Configuration
 public class MinIoClientConfig {
     @Value("${minio.endpoint}")
     private String endpoint;

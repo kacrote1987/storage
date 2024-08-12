@@ -6,12 +6,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
+
 @Service
 public class MinioServiceImpl implements MinioService {
 
+    @Resource
+    MinioUtil minioUtil;
     @Override
     public String minioUpload(@RequestParam MultipartFile file) {
-        MinioUtil minioUtil = null;
 //        获取上传的文件名
 //        String filename = file.getOriginalFilename();
 //        // 可以选择生成一个minio中存储的文件名称
