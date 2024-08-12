@@ -16,7 +16,7 @@ public interface ManageService {
      * 附件上传
      * @return
      */
-    String fileUpload(@RequestParam MultipartFile file,Long noticeId);
+    String fileUpload(@RequestParam MultipartFile file);
     /**
      * 通知新增
      * @return

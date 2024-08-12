@@ -1,19 +1,10 @@
 package com.wisionweb.entity;
 
 public class NoticeNewForm {
-    private String token;
     private String typeId;
     private String noticeName;
     private String noticeContent;
-    private String picLink;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
+    private String fileLink;
 
     public String getTypeId() {
         return typeId;
@@ -39,11 +30,11 @@ public class NoticeNewForm {
         this.noticeContent = noticeContent;
     }
 
-    public String getPicLink() {
-        return picLink;
+    public String getFileLink() {
+        return fileLink;
     }
 
-    public void setPicLink(String picLink) {
-        this.picLink = picLink;
+    public void setFileLink(String fileLink) {
+        this.fileLink = fileLink;
     }
 }

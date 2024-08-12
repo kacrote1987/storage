@@ -32,9 +32,10 @@ public class ManageServiceImpl implements ManageService {
     }
 
     @Override
-    public String fileUpload(MultipartFile file,Long noticeId) {
+    public String fileUpload(MultipartFile file) {
         String fileName = file.getOriginalFilename();
-        String filePath = "D:/upload/";
+//        String filePath = "D:/upload/";
+        String filePath = "http://localhost:6060/web/upload/";
         String fileLink = filePath + fileName;
         File dest = new File(filePath + fileName);
         try {
@@ -42,7 +43,6 @@ public class ManageServiceImpl implements ManageService {
         } catch (IOException e) {
            throw new IllegalArgumentException(e.getMessage());
         }
-        manageMapper.insertFile(fileLink,noticeId);
         return fileLink;
     }
 
@@ -50,13 +50,12 @@ public class ManageServiceImpl implements ManageService {
     public void noticeAdd(NoticeNewForm params){
         manageMapper.insertNotice(params);
         Long noticeId = manageMapper.selNewNoticeId(params.getNoticeName());
-        manageMapper.insertPic(params.getPicLink(),noticeId);
+        manageMapper.insertFile(params.getFileLink(),noticeId);
     }
 
     @Override
     public void noticeEdit(NoticeDetForm params) {
         manageMapper.updateNotice(params);
-        manageMapper.updatePic(params.getPicList().get(0).getFileLink(),params.getPicList().get(0).getFileId());
     }
 
     @Override

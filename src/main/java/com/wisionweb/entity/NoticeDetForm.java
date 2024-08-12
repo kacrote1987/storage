@@ -7,7 +7,7 @@ public class NoticeDetForm {
     private String noticeName;
     private String noticeContent;
     private String noticeTime;
-    private List<FileListForm> picList;
+    private List<FileListForm> fileList;
 
     public Long getNoticeId() {
         return noticeId;
@@ -41,11 +41,11 @@ public class NoticeDetForm {
         this.noticeTime = noticeTime;
     }
 
-    public List<FileListForm> getPicList() {
-        return picList;
+    public List<FileListForm> getFileList() {
+        return fileList;
     }
 
-    public void setPicList(List<FileListForm> picList) {
-        this.picList = picList;
+    public void setFileList(List<FileListForm> fileList) {
+        this.fileList = fileList;
     }
 }

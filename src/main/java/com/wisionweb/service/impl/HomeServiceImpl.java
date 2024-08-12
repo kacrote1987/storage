@@ -28,8 +28,8 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public NoticeDetForm noticeDet(Long typeId,Long noticeId) {
         NoticeDetForm noticeDet = homeMapper.noticeDet(typeId,noticeId);
-        List<FileListForm> picList = homeMapper.selFileList(noticeId);
-        noticeDet.setPicList(picList);
+        List<FileListForm> fileList = homeMapper.selFileList(noticeId);
+        noticeDet.setFileList(fileList);
         return noticeDet;
     }
 

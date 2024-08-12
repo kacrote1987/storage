@@ -28,8 +28,8 @@ public class ManageController {
 
     @ApiOperation("附件上传")
     @PostMapping("/fileupload")
-    public Result fileUpload(@RequestParam MultipartFile file,Long noticeId){
-        String fileLink = manageService.fileUpload(file,noticeId);
+    public Result fileUpload(@RequestParam MultipartFile file){
+        String fileLink = manageService.fileUpload(file);
         return Result.success(fileLink);
     }
 
