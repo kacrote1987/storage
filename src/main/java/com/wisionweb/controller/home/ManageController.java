@@ -26,11 +26,11 @@ public class ManageController {
         return Result.success(token);
     }
 
-    @ApiOperation("附件上传")
-    @PostMapping("/fileupload")
-    public Result fileUpload(@RequestParam MultipartFile file){
-        String fileLink = manageService.fileUpload(file);
-        return Result.success(fileLink);
+    @ApiOperation("minio上传")
+    @PostMapping("/upload")
+    public Result minioUpload(@RequestParam MultipartFile file){
+        String url= manageService.minioUpload(file);
+        return Result.success(url);
     }
 
     @ApiOperation("通知新增")
