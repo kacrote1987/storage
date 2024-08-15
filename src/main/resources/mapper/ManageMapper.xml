@@ -5,8 +5,8 @@
         select user_id,user_code,user_name from t_user_main where user_code=#{userCode} and user_pwd=#{userPwd} and user_state='1'
     </select>
     <insert id="insertNotice">
-        insert into t_notice_main(notice_name,notice_content,notice_time)
-        values(#{params.noticeName},#{params.noticeContent},now())
+        insert into t_notice_main(type_id,notice_name,notice_content,notice_time)
+        values(#{params.typeId},#{params.noticeName},#{params.noticeContent},now())
     </insert>
     <select id="selNewNoticeId" resultType="Long" >
         select notice_id from t_notice_main where notice_name=#{noticeName} order by notice_time desc limit 1

@@ -16,7 +16,7 @@ public interface ManageService {
      * 附件上传
      * @return
      */
-    String minioUpload(@RequestParam MultipartFile file);
+    String fileUpload(@RequestParam MultipartFile file,Long noticeId);
     /**
      * 通知新增
      * @return
@@ -37,4 +37,9 @@ public interface ManageService {
      * @return
      */
     void infoEdit(InfoDetForm params);
+    /**
+     * Minio上传
+     * @return
+     */
+    String minioUpload(@RequestParam MultipartFile file);
 }

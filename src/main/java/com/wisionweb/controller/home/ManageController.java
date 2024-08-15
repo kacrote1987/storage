@@ -26,12 +26,12 @@ public class ManageController {
         return Result.success(token);
     }
 
-    @ApiOperation("minio上传")
-    @PostMapping("/upload")
-    public Result minioUpload(@RequestParam MultipartFile file){
-        String url= manageService.minioUpload(file);
-        return Result.success(url);
-    }
+//    @ApiOperation("附件上传")
+//    @PostMapping("/fileupload")
+//    public Result fileUpload(@RequestParam MultipartFile file,Long noticeId){
+//        String fileLink = manageService.fileUpload(file,noticeId);
+//        return Result.success(fileLink);
+//    }
 
     @ApiOperation("通知新增")
     @PostMapping("/noticeadd")
@@ -59,5 +59,12 @@ public class ManageController {
     public Result infoEdit(@RequestBody InfoDetForm params){
         manageService.infoEdit(params);
         return Result.success();
+    }
+
+    @ApiOperation("minio上传")
+    @PostMapping("/upload")
+    public Result minioUpload(@RequestParam MultipartFile file){
+        String url= manageService.minioUpload(file);
+        return Result.success(url);
     }
 }

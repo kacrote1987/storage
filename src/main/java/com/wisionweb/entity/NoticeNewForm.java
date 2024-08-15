@@ -1,16 +1,16 @@
 package com.wisionweb.entity;
 
 public class NoticeNewForm {
-    private String typeId;
+    private Long typeId;
     private String noticeName;
     private String noticeContent;
     private String fileLink;
 
-    public String getTypeId() {
+    public Long getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(String typeId) {
+    public void setTypeId(Long typeId) {
         this.typeId = typeId;
     }
 

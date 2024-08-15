@@ -30,23 +30,13 @@ public class MyExceptionHandler {
 
     private final static Logger log = LoggerFactory.getLogger(MyExceptionHandler.class);
 
-    @ExceptionHandler(MissingServletRequestParameterException.class)
-    public Object handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
-        log.error("缺少请求参数", e);
-        return responseException("缺少请求参数");
-    }
-    @ExceptionHandler(UnAuthorizationException.class)
-    public Object handleMissingServletRequestParameterException(UnAuthorizationException e) {
-        log.error("鉴权异常", e);
-        return responseException(e.getMessage());
-    }
     /**
      * 400 - Bad Request
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Object handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error("参数解析失败", e);
-        return responseException("参数传入方式有误");
+        return responseException(400 ,"参数传入方式有误");
     }
 
     /**
@@ -56,7 +46,7 @@ public class MyExceptionHandler {
     public Object handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("参数验证失败", e.getMessage());
         BindingResult result = e.getBindingResult();
-        return responseException(validMsg(result));
+        return responseException(400 ,validMsg(result));
     }
 
     private String validMsg(BindingResult result){
@@ -75,7 +65,7 @@ public class MyExceptionHandler {
         log.error("参数绑定失败", e);
         BindingResult result = e.getBindingResult();
 
-        return responseException(validMsg(result));
+        return responseException(400 ,validMsg(result));
     }
 
     /**
@@ -87,7 +77,7 @@ public class MyExceptionHandler {
         Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
         ConstraintViolation<?> violation = violations.iterator().next();
         String message = violation.getMessage();
-        return responseException(message);
+        return responseException(400 ,message);
     }
 
     /**
@@ -96,25 +86,13 @@ public class MyExceptionHandler {
     @ExceptionHandler(ValidationException.class)
     public Object handleValidationException(ValidationException e) {
         log.error("参数验证失败", e);
-        return responseException(e.getMessage());
+        return responseException(400 ,e.getMessage());
     }
 
-    /**
-     * 405 - Method Not Allowed
-     */
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public Object handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-        log.error("不支持当前请求方法", e);
-        return responseException(e.getMessage());
-    }
-
-    /**
-     * 415 - Unsupported Media Type
-     */
-    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public Object handleHttpMediaTypeNotSupportedException(Exception e) {
-        log.error("不支持当前媒体类型", e);
-        return responseException("不支持当前媒体类型");
+    @ExceptionHandler(UnAuthorizationException.class)
+    public Object handleMissingServletRequestParameterException(UnAuthorizationException e) {
+        log.error("鉴权异常", e);
+        return responseException(401 ,e.getMessage());
     }
 
 //    /**
@@ -125,8 +103,26 @@ public class MyExceptionHandler {
 //    @ExceptionHandler(UnAuthorizationException.class)
 //    public Object unAuthorizationException(UnAuthorizationException e) {
 //        log.error("鉴权异常", e);
-//        return responseException(ResponseCodeEnum.AUTH_UNACCESS,e.getMsg());
+//        return responseException(401 , e.getMessage());
 //    }
+
+    /**
+     * 405 - Method Not Allowed
+     */
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public Object handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        log.error("不支持当前请求方法", e);
+        return responseException(405 ,e.getMessage());
+    }
+
+    /**
+     * 415 - Unsupported Media Type
+     */
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public Object handleHttpMediaTypeNotSupportedException(Exception e) {
+        log.error("不支持当前媒体类型", e);
+        return responseException(415 ,"不支持当前媒体类型");
+    }
 
     /**
      * 操作数据库出现异常:名称重复，外键关联
@@ -134,7 +130,13 @@ public class MyExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public Object handleException(DataIntegrityViolationException e) {
         log.error("操作数据库出现异常:", e);
-        return responseException("操作数据库出现异常：字段重复、有外键关联等等");
+        return responseException(500 ,"操作数据库出现异常：字段重复、有外键关联等等");
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public Object handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
+        log.error("缺少请求参数", e);
+        return responseException(500 ,"缺少请求参数");
     }
 
     /**
@@ -143,17 +145,17 @@ public class MyExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public Object handleServiceException(IllegalArgumentException e) {
         log.error("参数异常:", e);
-        return responseException( e.getMessage());
+        return responseException(500 ,e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public Result exceptionHandler(Exception e) {
         log.error("异常",e);
-        return responseException(e.getMessage());
+        return responseException(500 ,e.getMessage());
     }
 
-    public Result responseException(String msg){
-        return Result.failed(msg);
+    public Result responseException(Integer code,String msg){
+        return Result.failed(code,msg);
     }
 
 }

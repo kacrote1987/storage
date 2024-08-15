@@ -33,8 +33,8 @@ public class Result {
         return new Result(200,"success",null);
     }
 
-    public static Result failed(String msg){
-        return new Result(500,msg,null);
+    public static Result failed(Integer code,String msg){
+        return new Result(code,msg,null);
     }
 
     public Integer getCode() {

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class ManageServiceImpl implements ManageService {
     @Resource
     ManageMapper manageMapper;
+    @Resource
     MinioUtil minioUtil;
 
     @Override
@@ -32,11 +35,20 @@ public class ManageServiceImpl implements ManageService {
     }
 
     @Override
-    public String minioUpload(MultipartFile file) {
-        String fileName = minioUtil.upload(file);
-        String url = minioUtil.preview(fileName);
-        return url;
+    public String fileUpload(MultipartFile file, Long noticeId) {
+        String fileName = file.getOriginalFilename();
+        String filePath = "D:/upload/";
+        String fileLink = filePath + fileName;
+        File dest = new File(filePath + fileName);
+        try {
+            file.transferTo(dest);
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+//        manageMapper.insertFile(fileLink,noticeId);
+        return fileLink;
     }
+
 
     @Override
     public void noticeAdd(NoticeNewForm params){
@@ -60,5 +72,12 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public void infoEdit(InfoDetForm params) {
         manageMapper.updateInfo(params);
+    }
+
+    @Override
+    public String minioUpload(MultipartFile file) {
+        String fileName = minioUtil.upload(file);
+        String url = minioUtil.preview(fileName);
+        return url;
     }
 }
