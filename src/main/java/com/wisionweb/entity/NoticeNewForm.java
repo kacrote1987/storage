@@ -1,10 +1,12 @@
 package com.wisionweb.entity;
 
+import java.util.List;
+
 public class NoticeNewForm {
     private Long typeId;
     private String noticeName;
     private String noticeContent;
-    private String fileLink;
+    private List<FileListForm> fileList;
 
     public Long getTypeId() {
         return typeId;
@@ -30,11 +32,11 @@ public class NoticeNewForm {
         this.noticeContent = noticeContent;
     }
 
-    public String getFileLink() {
-        return fileLink;
+    public List<FileListForm> getFileList() {
+        return fileList;
     }
 
-    public void setFileLink(String fileLink) {
-        this.fileLink = fileLink;
+    public void setFileList(List<FileListForm> fileList) {
+        this.fileList = fileList;
     }
 }

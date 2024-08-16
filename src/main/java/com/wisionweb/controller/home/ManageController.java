@@ -34,35 +34,35 @@ public class ManageController {
 //    }
 
     @ApiOperation("通知新增")
-    @PostMapping("/noticeadd")
+    @PostMapping("/noticeAdd")
     public Result noticeAdd(@RequestBody NoticeNewForm params){
         manageService.noticeAdd(params);
         return Result.success();
     }
 
     @ApiOperation("通知修改")
-    @PostMapping("/noticeedit")
+    @PostMapping("/noticeEdit")
     public Result noticeEdit(@RequestBody NoticeDetForm params){
         manageService.noticeEdit(params);
         return Result.success();
     }
 
     @ApiOperation("通知删除")
-    @GetMapping("/noticedel")
+    @GetMapping("/noticeDel")
     public Result noticeDel(@RequestParam Long noticeId){
         manageService.noticeDel(noticeId);
         return Result.success();
     }
 
     @ApiOperation("关于我们修改")
-    @PostMapping("/infoedit")
+    @PostMapping("/infoEdit")
     public Result infoEdit(@RequestBody InfoDetForm params){
         manageService.infoEdit(params);
         return Result.success();
     }
 
     @ApiOperation("minio上传")
-    @PostMapping("/minioupload")
+    @PostMapping("/minioUpload")
     public Result minioUpload(@RequestParam MultipartFile file){
         String url= manageService.minioUpload(file);
         return Result.success(url);

@@ -14,6 +14,8 @@ public interface ManageMapper {
     Long selNewNoticeId(String noticeName);
     boolean insertFile(String fileLink,Long noticeId);
     boolean updateNotice(@Param("params") NoticeDetForm params);
+    boolean deleteFile(Long noticeId);
+    boolean updateFile(@Param("params") NoticeDetForm params);
     Long checkNoticeId(Long noticeId);
     boolean deleteNotice(Long noticeId);
     boolean updateInfo(@Param("params") InfoDetForm params);

@@ -19,6 +19,9 @@
         update t_notice_main set notice_name=#{params.noticeName},notice_content=#{params.noticeContent}
         ,notice_time=now() where notice_id=#{params.noticeId}
     </update>
+    <delete id="deleteFile">
+        delete from t_notice_file where notice_id=#{noticeId}
+    </delete>
     <select id="checkNoticeId" resultType="Long" >
         select notice_id from t_notice_main where notice_state is null and notice_id=#{noticeId}
     </select>

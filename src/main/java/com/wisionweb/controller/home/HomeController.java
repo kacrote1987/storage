@@ -20,49 +20,49 @@ public class HomeController {
     HomeService homeService;
 
     @ApiOperation("首页列表")
-    @PostMapping("/homelist")
-    public Result homeList(){
+    @PostMapping("/homeList")
+    public Result noticeList(){
         List<NoticeListForm> noticeList= homeService.noticeList(1L);
         return Result.success(noticeList);
     }
 
     @ApiOperation("新闻资讯列表")
-    @PostMapping("/newslist")
+    @PostMapping("/newsList")
     public Result newsList(){
         List<NoticeListForm> noticeList= homeService.noticeList(2L);
         return Result.success(noticeList);
     }
 
     @ApiOperation("产品中心列表")
-    @PostMapping("/prodlist")
+    @PostMapping("/prodList")
     public Result prodList(){
         List<NoticeListForm> noticeList= homeService.noticeList(3L);
         return Result.success(noticeList);
     }
 
     @ApiOperation("解决方案列表")
-    @PostMapping("/solutionlist")
+    @PostMapping("/solutionList")
     public Result solutionList(){
         List<NoticeListForm> noticeList= homeService.noticeList(4L);
         return Result.success(noticeList);
     }
 
     @ApiOperation("服务与支持列表")
-    @PostMapping("/supportlist")
+    @PostMapping("/supportList")
     public Result supportList(){
         List<NoticeListForm> noticeList= homeService.noticeList(5L);
         return Result.success(noticeList);
     }
 
     @ApiOperation("通知详情")
-    @PostMapping("/noticedet")
+    @PostMapping("/noticeDet")
     public Result noticeDet(Long typeId, Long noticeId){
         NoticeDetForm noticeDet= homeService.noticeDet(typeId,noticeId);
         return Result.success(noticeDet);
     }
 
     @ApiOperation("关于我们")
-    @PostMapping("/infodet")
+    @PostMapping("/infoDet")
     public Result infoDet(){
         InfoDetForm infoDet= homeService.infoDet();
         return Result.success(infoDet);

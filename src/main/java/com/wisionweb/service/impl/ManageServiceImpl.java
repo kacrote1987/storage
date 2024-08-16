@@ -54,12 +54,18 @@ public class ManageServiceImpl implements ManageService {
     public void noticeAdd(NoticeNewForm params){
         manageMapper.insertNotice(params);
         Long noticeId = manageMapper.selNewNoticeId(params.getNoticeName());
-        manageMapper.insertFile(params.getFileLink(),noticeId);
+        for(int i=0;i<params.getFileList().size();i++){
+            manageMapper.insertFile(params.getFileList().get(i).getFileLink(),noticeId);
+        }
     }
 
     @Override
     public void noticeEdit(NoticeDetForm params) {
         manageMapper.updateNotice(params);
+        manageMapper.deleteFile(params.getNoticeId());
+        for(int i=0;i<params.getFileList().size();i++){
+            manageMapper.insertFile(params.getFileList().get(i).getFileLink(),params.getNoticeId());
+        }
     }
 
     @Override
