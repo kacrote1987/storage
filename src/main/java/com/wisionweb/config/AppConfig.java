@@ -23,10 +23,9 @@ public class AppConfig implements WebMvcConfigurer {
                 "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**",
                 "/",
                 "",
-                "/index",
-                "/manage/login",
                 "/home/**",
-                "/minio/**")
+                "/manage/login",
+                "/manage/minioupload")
                 .addPathPatterns("/**");
     }
     @Override

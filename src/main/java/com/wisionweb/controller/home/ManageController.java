@@ -62,7 +62,7 @@ public class ManageController {
     }
 
     @ApiOperation("minio上传")
-    @PostMapping("/upload")
+    @PostMapping("/minioupload")
     public Result minioUpload(@RequestParam MultipartFile file){
         String url= manageService.minioUpload(file);
         return Result.success(url);
