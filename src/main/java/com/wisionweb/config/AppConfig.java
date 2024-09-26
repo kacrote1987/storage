@@ -25,7 +25,7 @@ public class AppConfig implements WebMvcConfigurer {
                 "",
                 "/home/**",
                 "/manage/login",
-                "/manage/minioupload")
+                "/manage/minioUpload")
                 .addPathPatterns("/**");
     }
     @Override
