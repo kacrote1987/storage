@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybaselectByUsernametiselectUsers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wisionweb.mapper.HomeMapper">
     <select id="noticeList" resultType="com.wisionweb.entity.NoticeListForm" >
-        select a.notice_id,b.type_name,a.notice_name,a.notice_content,date(a.notice_time) as notice_time from t_notice_main a
-        left join t_notice_type b on a.type_id=b.type_id where a.type_id=#{typeId} and a.notice_state is null
+        select a.notice_id,b.type_name,a.notice_name,a.notice_content,date(a.notice_time) as notice_time,date(a.update_time) as update_time
+        from t_notice_main a left join t_notice_type b on a.type_id=b.type_id where a.type_id=#{typeId} and a.notice_state is null
         <if test="noticeName!=null and noticeName!=''">
             and a.notice_name like '%' #{noticeName} '%'
         </if>
@@ -13,7 +13,7 @@
         select file_link from t_notice_file where notice_id=#{noticeId} order by file_time limit 1
     </select>
     <select id="noticeDet" resultType="com.wisionweb.entity.NoticeDetForm" >
-        select a.notice_id,b.type_name,a.notice_name,a.notice_content,a.notice_time
+        select a.notice_id,b.type_name,a.notice_name,a.notice_content,a.notice_time,a.update_time
         from t_notice_main a left join t_notice_type b on a.type_id=b.type_id where a.type_id=#{typeId} and a.notice_id=#{noticeId}
     </select>
     <select id="selFileList" resultType="com.wisionweb.entity.FileListForm" >

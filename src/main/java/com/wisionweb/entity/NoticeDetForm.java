@@ -7,6 +7,7 @@ public class NoticeDetForm {
     private String noticeName;
     private String noticeContent;
     private String noticeTime;
+    private String updateTime;
     private List<FileListForm> fileList;
 
     public Long getNoticeId() {
@@ -39,6 +40,14 @@ public class NoticeDetForm {
 
     public void setNoticeTime(String noticeTime) {
         this.noticeTime = noticeTime;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
     public List<FileListForm> getFileList() {
