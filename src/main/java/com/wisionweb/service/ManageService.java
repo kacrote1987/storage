@@ -17,5 +17,5 @@ public interface ManageService {
     void noticeDel(Long noticeId);
     void infoEdit(InfoDetForm params);
     String minioUpload(@RequestParam MultipartFile file);
-    List<UrlListForm> minioUploadMultip(@RequestParam List<MultipartFile> files);
+    List<UrlListForm> minioUploadMultip(@RequestParam MultipartFile[] files);
 }

@@ -72,7 +72,7 @@ public class ManageController {
 
     @ApiOperation("minio批量上传")
     @PostMapping("/minioUploadMultip")
-    public Result minioUploadMultip(@RequestParam List<MultipartFile> files){
+    public Result minioUploadMultip(@RequestParam MultipartFile[] files){
         List<UrlListForm> urlList= manageService.minioUploadMultip(files);
         return Result.success(urlList);
     }

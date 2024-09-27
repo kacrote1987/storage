@@ -87,11 +87,11 @@ public class ManageServiceImpl implements ManageService {
     }
 
     @Override
-    public List<UrlListForm> minioUploadMultip(List<MultipartFile> files) {
+    public List<UrlListForm> minioUploadMultip(MultipartFile[] files) {
         List<UrlListForm> urlList = new ArrayList<>();
         UrlListForm urlForm = new UrlListForm();
-        for(int i=0;i<files.size();i++){
-            String fileName = minioUtil.upload(files.get(i));
+        for(int i=0;i<files.length;i++){
+            String fileName = minioUtil.upload(files[i]);
             String fileLink = minioUtil.preview(fileName);
             urlForm.setFileName(fileName);
             urlForm.setFileLink(fileLink);
