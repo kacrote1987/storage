@@ -3,6 +3,7 @@ package com.wisionweb.controller.home;
 import com.wisionweb.entity.InfoDetForm;
 import com.wisionweb.entity.NoticeDetForm;
 import com.wisionweb.entity.NoticeNewForm;
+import com.wisionweb.entity.UrlListForm;
 import com.wisionweb.service.ManageService;
 import com.wisionweb.util.Result;
 import io.swagger.annotations.Api;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Api(description = "后台管理")
 @RestController
@@ -66,5 +68,12 @@ public class ManageController {
     public Result minioUpload(@RequestParam MultipartFile file){
         String url= manageService.minioUpload(file);
         return Result.success(url);
+    }
+
+    @ApiOperation("minio批量上传")
+    @PostMapping("/minioUploadMultip")
+    public Result minioUploadMultip(@RequestParam List<MultipartFile> files){
+        List<UrlListForm> urlList= manageService.minioUploadMultip(files);
+        return Result.success(urlList);
     }
 }

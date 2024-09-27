@@ -1,9 +1,6 @@
-package com.wisionweb.service.impl;
+package com.wisionweb.impl;
 
-import com.wisionweb.entity.InfoDetForm;
-import com.wisionweb.entity.NoticeDetForm;
-import com.wisionweb.entity.NoticeNewForm;
-import com.wisionweb.entity.UserListForm;
+import com.wisionweb.entity.*;
 import com.wisionweb.exception.UnAuthorizationException;
 import com.wisionweb.mapper.ManageMapper;
 import com.wisionweb.service.ManageService;
@@ -15,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -85,5 +84,19 @@ public class ManageServiceImpl implements ManageService {
         String fileName = minioUtil.upload(file);
         String url = minioUtil.preview(fileName);
         return url;
+    }
+
+    @Override
+    public List<UrlListForm> minioUploadMultip(List<MultipartFile> files) {
+        List<UrlListForm> urlList = new ArrayList<>();
+        UrlListForm urlForm = new UrlListForm();
+        for(int i=0;i<files.size();i++){
+            String fileName = minioUtil.upload(files.get(i));
+            String fileLink = minioUtil.preview(fileName);
+            urlForm.setFileName(fileName);
+            urlForm.setFileLink(fileLink);
+            urlList.add(urlForm);
+        }
+        return urlList;
     }
 }

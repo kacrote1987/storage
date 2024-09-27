@@ -1,4 +1,4 @@
-package com.wisionweb.service.impl;
+package com.wisionweb.impl;
 
 import com.wisionweb.entity.InfoDetForm;
 import com.wisionweb.entity.NoticeDetForm;
