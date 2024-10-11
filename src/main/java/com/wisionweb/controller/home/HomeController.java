@@ -19,7 +19,7 @@ public class HomeController {
     @Resource
     HomeService homeService;
 
-    @ApiOperation("首页列表")
+    @ApiOperation("首页列表111")
     @PostMapping("/homeList")
     public Result noticeList(){
         List<NoticeListForm> noticeList= homeService.noticeList(1L);
