@@ -8,10 +8,10 @@
         <version>2.1.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.wision</groupId>
-    <artifactId>wisionweb</artifactId>
+    <groupId>com.storage</groupId>
+    <artifactId>storage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>wisionweb</name>
+    <name>storage</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

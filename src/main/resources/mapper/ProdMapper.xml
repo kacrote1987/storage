@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybaselectByUsernametiselectUsers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.storage.mapper.ProdMapper">
+    <select id="prodList" resultType="com.storage.entity.ProdListVo" >
+        select a.prod_id,a.type_id,b.type_name,a.prod_name,a.prod_num,a.update_time,a.prod_state from t_prod_main a
+        inner join t_prod_type b on a.type_id=b.type_id where 1=1 order by a.update_time desc
+    </select>
+    <select id="prodDet" resultType="com.storage.entity.ProdDetVo" >
+        select a.prod_id,a.type_id,b.type_name,a.prod_name,a.prod_num,a.update_time,a.prod_state from t_prod_main a where a.prod_id=#{prodId}
+    </select>
+</mapper>

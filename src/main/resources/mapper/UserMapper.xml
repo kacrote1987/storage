@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybaselectByUsernametiselectUsers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.storage.mapper.UserMapper">
+    <select id="login" resultType="com.storage.entity.LoginVo" >
+        select * from t_user_main where user_code=#{userCode} and user_pwd=#{userPwd} and user_state='1'
+    </select>
+    <select id="userList" resultType="com.storage.entity.UserListVo" >
+        select a.user_id,b.dept_name,a.user_name,a.user_sex,a.user_no,a.user_tel,a.user_cornet,a.user_offcall
+        ,a.user_state from t_sys_user a inner join (select * from t_sys_dept where dept_type=#{type}) b on a.${type}_id=b.dept_id
+         where a.user_state!='离职'
+        <if test="params.deptId!=null and params.deptId!='' and params.deptId!=0">
+            and a.${type}_id=#{params.deptId}
+        </if>
+        <if test="params.userName!=null and params.userName!=''">
+            and a.user_name like '%' #{params.userName} '%'
+        </if>
+        <if test="params.userState!=null and params.userState!=''">
+            and a.user_state=#{params.userState}
+        </if>
+        order by a.dept_id,a.user_order desc,a.user_no
+    </select>
+    <select id="selDet" resultType="com.storage.entity.UserDetVo">
+        select t.user_id,t.user_no,t.user_name,t.user_sex,t.user_tel,t.user_cornet,t.user_offcall,t.user_idcard,t.user_homeaddr,t.user_hometel
+        ,t.user_edu,t.user_degree,t.user_school,t.user_major,t.user_polity,t.user_politime,t.user_prop,t.user_jointime,t.dept_id,t.user_duty
+        ,t.part_id,t.majo_id,t.user_prof,t.user_topcert,t.user_CPK,t.user_paymonth,(case when length(t.user_idcard)='18' then year(SYSDATE())-SUBSTR(t.user_idcard,7,4)
+        else null end) as user_age,t.user_offaddr,t.user_note,t.role_name,t.user_state from t_sys_user t where t.user_id = #{userId}
+    </select>
+</mapper>

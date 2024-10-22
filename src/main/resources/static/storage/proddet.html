@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>项目详细</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+<div class="layui-fluid">
+  <div class="layui-card">
+    <div class="layui-card-body">
+      <div class="layui-tab">
+        <div class="layui-tab-content">
+          <div class="layui-tab-item layui-show">
+            <!--            基本情况页-->
+            <div class="layui-row layui-col-space12">
+              <div class="layui-col-md2">
+              </div>
+              <div class="layui-col-md8">
+                <div class="layui-card">
+                  <input id="prodId" type="text" name="prodId" placeholder="" autocomplete="off"
+                         class="layui-input" style="display: none">
+                  <div class="layui-card-body">
+                    <form class="layui-form" action="" lay-filter="component-form-element">
+                      <div class="layui-row layui-col-space10 layui-form-item">
+                        <div class="layui-col-lg6">
+                          <label class="layui-form-label">产品类别</label>
+                          <div class="layui-input-block">
+                            <select id="prodType" lay-filter="prodType">
+                              <option value="">全部</option>
+                              <option value="智慧园区">智慧园区</option>
+                              <option value="未来社区">未来社区</option>
+                              <option value="智慧国企">智慧国企</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="layui-col-lg6">
+                          <label class="layui-form-label">产品状态</label>
+                          <div class="layui-input-block">
+                            <select id="prodState" lay-filter="prodState">
+                              <option value="在用">在用</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="layui-row layui-col-space10 layui-form-item">
+                          <div class="layui-col-lg6">
+                            <label class="layui-form-label">产品名称</label>
+                            <div class="layui-input-block">
+                              <input id="prodName" type="text" lay-verify="required" placeholder=""
+                                     autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-col-lg6">
+                            <label class="layui-form-label">项目简称</label>
+                            <div class="layui-input-block">
+                              <input id="prodNikname" type="text" lay-verify="required" placeholder=""
+                                     autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="layui-row layui-col-space10 layui-form-item">
+                          <div class="layui-col-lg6">
+                            <label class="layui-form-label">版本号</label>
+                            <div class="layui-input-block">
+                              <input id="prodVer" type="text" lay-verify="required" placeholder=""
+                                     autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">产品说明</label>
+                          <div class="layui-input-block">
+                              <textarea id="prodExplain" placeholder="" class="layui-textarea"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="layui-col-md2">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/script/login.js"></script>
+<script src="js/demo.js"></script>
+<script src="layuiadmin/layui/layui.js"></script>
+<script>
+  layui.config({
+    base: 'layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form', 'table', 'laydate'], function () {
+    var $ = layui.$
+            , form = layui.form
+            , laydate = layui.laydate
+            , table = layui.table;
+
+    form.render(null, 'component-form-group');
+    var prodId = window.location.search.substring(1, window.location.search.length);
+    $.ajax({
+      type: "post",
+      url: "/prodSto/prodDet",
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+      data: prodId,
+      success: function (detObj) {
+        if (detObj.msg == "success") {
+          var detJson = detObj.data[0];
+          $('#prodId').val(detJson.prodId);
+          $('#prodType').val(detJson.prodType);
+          $('#prodName').val(detJson.prodName);
+          $('#prodNikname').val(detJson.prodNikname);
+          $('#prodVer').val(detJson.prodVer);
+          $('#prodLink').val(detJson.prodLink);
+          $('#prodExplain').val(detJson.prodExplain);
+          $('#prodTime').val(detJson.prodTime);
+          $('#prodState').val(detJson.prodState);
+          layui.form.render();
+        }
+      }
+    });
+
+  });
+</script>
+</body>
+</html>
