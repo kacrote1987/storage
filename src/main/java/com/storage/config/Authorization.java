@@ -1,7 +1,5 @@
 package com.storage.config;
 
-import com.storage.exception.UnAuthorizationException;
-import com.storage.util.MyCache;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
