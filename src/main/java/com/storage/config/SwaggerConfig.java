@@ -36,7 +36,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         Contact contact = new Contact("", "", "");
         return new ApiInfo(
-                "物芯API",
+                "API",
                 "",
                 "v1.0",
                 "",
