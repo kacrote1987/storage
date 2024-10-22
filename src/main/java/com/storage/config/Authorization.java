@@ -1,5 +1,7 @@
 package com.storage.config;
 
+import com.storage.exception.UnAuthorizationException;
+import com.storage.util.MyCache;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -12,14 +14,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class Authorization extends HandlerInterceptorAdapter {
-    final static String TOKEN="Wx-Token";
+    final static String TOKEN="token";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token=request.getHeader(TOKEN);
         if(token==null){throw new UnAuthorizationException("token为空");}
+
         Object o= MyCache.get(token);
-        if(o==null){throw new UnAuthorizationException("认证已过期");}
+        if(o==null){throw new UnAuthorizationException("用户未登录");}
+
         return true;
     }
 }

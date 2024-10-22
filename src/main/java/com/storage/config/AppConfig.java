@@ -8,6 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
 
+/**
+ * @author zhangyq
+ * @create 2019-09-10 20:20
+ */
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
 
@@ -19,12 +23,12 @@ public class AppConfig implements WebMvcConfigurer {
 
         InterceptorRegistration addInterceptor = registry.addInterceptor(authorizationInterceptor);
 
-        addInterceptor.excludePathPatterns(
-                        "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**",
-                        "/",
-                        "",
-                        "/user/login")
-                .addPathPatterns("");  //  /**
+        addInterceptor.excludePathPatterns("/user/login",
+                "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**",
+                "/",
+                "",
+                "/index")
+                .addPathPatterns("/**");
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
